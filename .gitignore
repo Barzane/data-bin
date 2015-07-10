@@ -1,0 +1,4 @@
+*.pyc
+/build/output
+/build/input
+/build/temp
