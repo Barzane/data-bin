@@ -1,10 +1,5 @@
 # -*- coding: utf-8 -*-
 
-#call syntax:
-#
-#import safe_cPickle
-#safe_cPickle.safe_cPickle_dump(dst, object)
-
 def safe_cPickle_dump(dst, object):
 
     import cPickle, segment_timer
