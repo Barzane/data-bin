@@ -464,11 +464,13 @@ def wrapper(test_run, security, security_max):
         
     else:
                 
-#        year_list = xrange(1993, 2014, 1)
-#        quarter_list = xrange(1, 5)
+        year_list = xrange(1993, 2014, 1)
+        quarter_list = xrange(1, 5)
         
-        year_list = xrange(2010, 2012, 1)
-        quarter_list = xrange(1, 2)
+#        for testing:
+#            
+#        year_list = xrange(2010, 2012, 1)
+#        quarter_list = xrange(1, 2)
     
     for year in year_list:
         for quarter in quarter_list:

@@ -14,8 +14,6 @@ raw_input('press a key to continue')
 print
 print 'clear contents of \output and \\temp and \input'
 
-sss
-
 for folder in ['..\\output\\*', '..\\temp\\*', '..\\input\\*']:
 
     folder_contents = glob.glob(folder)
@@ -30,7 +28,7 @@ print 'parse DB1B Coupon data from .zip to coupon_year_quarter.bin'
 
 coupon_parse_options = {}
 coupon_parse_options['test_run'] = False
-coupon_parse_options['security'] = True
+coupon_parse_options['security'] = False
 coupon_parse_options['security_max'] = 10000
 
 parse_coupon_csv.wrapper(**coupon_parse_options)
