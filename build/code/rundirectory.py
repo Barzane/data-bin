@@ -3,6 +3,7 @@
 import os, glob, shutil
 
 import parse_coupon_csv, parse_ticket_csv
+#import merge_coupon_ticket
 
 def manual_transfer_reminder():
 
@@ -37,10 +38,12 @@ parse_options['security_max'] = 10000
 parse_options['test_periods'] = ([2010], [1])
 parse_options['full_periods'] = (xrange(1993, 2014, 1), xrange(1, 5))
 
+print
 print 'parse DB1B Coupon data from .zip to coupon_year_quarter.bin'
 
 parse_coupon_csv.wrapper(**parse_options)
 
+print
 print 'parse DB1B Ticket data from .zip to coupon_year_quarter.bin'
 
 parse_ticket_csv.wrapper(**parse_options)

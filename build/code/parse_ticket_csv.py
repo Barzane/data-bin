@@ -195,8 +195,12 @@ def parse_csv(src, security, security_max, year, quarter):
         
         print 'sleeping for 15 seconds'
         time.sleep(15)
-        
+    
     data_reader.close()
+    
+    print 'deleting .csv file from \\input'
+    
+    os.remove(dst_csv)
     
     return None
 

@@ -448,10 +448,9 @@ def parse_csv(src, security, security_max, year, quarter):
         
     data_reader.close()
     
-    if year >= 2011:
-        
-        print '[deleting unzipped .csv] ' + dst_csv
-        os.remove(dst_csv)
+    print 'deleting .csv file from \\input'
+    
+    os.remove(dst_csv)
     
     return None
 
