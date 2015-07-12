@@ -2,14 +2,20 @@
 
 import os, glob, shutil
 
-import parse_coupon_csv
+import parse_coupon_csv, parse_ticket_csv
 
-print
-print 'manually transfer .zip datafiles to data\\DB1BCoupon before continuing'
-print 'e.g. Origin_and_Destination_Survey_DB1BCoupon_2010_1.zip'
-print
+def manual_transfer_reminder():
 
-raw_input('press a key to continue')
+    print
+    print 'manually transfer .zip datafiles to data\\DB1BXXXXXX before continuing'
+    print 'e.g. Origin_and_Destination_Survey_DB1BXXXXXXX_2010_1.zip'
+    print
+    
+    raw_input('press a key to continue')
+    
+    return None
+
+manual_transfer_reminder()
 
 print
 print 'clear contents of \output and \\temp and \input'
@@ -21,17 +27,23 @@ for folder in ['..\\output\\*', '..\\temp\\*', '..\\input\\*']:
     for filename in folder_contents:
         os.remove(filename)
 
-print 'parse DB1B Coupon data from .zip to coupon_year_quarter.bin'
-
-#test_run = True parses Coupon for one quarter only
+#test_run = True parses Coupon or Ticket for one quarter only
 #security = True considers first (security_max) lines only
 
-coupon_parse_options = {}
-coupon_parse_options['test_run'] = False
-coupon_parse_options['security'] = False
-coupon_parse_options['security_max'] = 10000
+parse_options = {}
+parse_options['test_run'] = True
+parse_options['security'] = True
+parse_options['security_max'] = 10000
+parse_options['test_periods'] = ([2010], [1])
+parse_options['full_periods'] = (xrange(1993, 2014, 1), xrange(1, 5))
 
-parse_coupon_csv.wrapper(**coupon_parse_options)
+print 'parse DB1B Coupon data from .zip to coupon_year_quarter.bin'
+
+parse_coupon_csv.wrapper(**parse_options)
+
+print 'parse DB1B Ticket data from .zip to coupon_year_quarter.bin'
+
+parse_ticket_csv.wrapper(**parse_options)
 
 print
 print 'move pyc files (byte code) from \code to \\temp'

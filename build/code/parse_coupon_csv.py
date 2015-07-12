@@ -455,22 +455,17 @@ def parse_csv(src, security, security_max, year, quarter):
     
     return None
 
-def wrapper(test_run, security, security_max):
+def wrapper(test_run, security, security_max, test_periods, full_periods):
     
     if test_run:
         
-        year_list = [2010]
-        quarter_list = [1]
+        year_list = test_periods[0]
+        quarter_list = test_periods[1]
         
     else:
                 
-        year_list = xrange(1993, 2014, 1)
-        quarter_list = xrange(1, 5)
-        
-#        for testing:
-#            
-#        year_list = xrange(2010, 2012, 1)
-#        quarter_list = xrange(1, 2)
+        year_list = full_periods[0]
+        quarter_list = full_periods[1]
     
     for year in year_list:
         for quarter in quarter_list:
@@ -478,9 +473,7 @@ def wrapper(test_run, security, security_max):
             src = '..\\..\\data\\DB1BCoupon\\Origin_and_Destination_Survey_DB1BCoupon_' + str(year) + '_' + str(quarter) + '.zip'
             
             try:
-            
-#                raw data path set in parse_coupon_csv.py
-                
+                            
                 parse_csv(src, security, security_max, year, quarter)
                 
             except IOError:
