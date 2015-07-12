@@ -3,7 +3,7 @@
 import time, safe_cPickle, segment_timer, os, zipfile, shutil
 
 def parse_csv(src, security, security_max, year, quarter):
-    
+   
     assert isinstance(src, str), 'src must be a string'
     assert isinstance(security, bool), 'security must be a Boolean'
     assert ((security_max > 0) and isinstance(security_max, int)),\
@@ -226,9 +226,7 @@ def wrapper(test_run, security, security_max, test_periods, full_periods):
                 parse_csv(src, security, security_max, year, quarter)
                 
             except IOError:
-                
-#                this will also return an error if data_path_out does not exist
-                
+
                 raise IOError('requested data unavailable: year ' + str(year) + ', quarter ' + str(quarter))
     
     return None

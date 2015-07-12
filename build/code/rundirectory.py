@@ -2,8 +2,7 @@
 
 import os, glob, shutil
 
-import parse_coupon_csv, parse_ticket_csv
-#import merge_coupon_ticket
+import parse_coupon_csv, parse_ticket_csv, merge_coupon_ticket
 
 def manual_transfer_reminder():
 
@@ -33,7 +32,7 @@ for folder in ['..\\output\\*', '..\\temp\\*', '..\\input\\*']:
 
 parse_options = {}
 parse_options['test_run'] = True
-parse_options['security'] = True
+parse_options['security'] = False
 parse_options['security_max'] = 10000
 parse_options['test_periods'] = ([2010], [1])
 parse_options['full_periods'] = (xrange(1993, 2014, 1), xrange(1, 5))
@@ -48,6 +47,24 @@ print 'parse DB1B Ticket data from .zip to coupon_year_quarter.bin'
 
 parse_ticket_csv.wrapper(**parse_options)
 
+print
+print 'merge Coupon and Ticket .bin files to Itinerary'
+
+print
+print 'move .bin files from \\output to \\input'
+
+for folder in ['..\\output\\*']:
+
+    folder_contents = glob.glob(folder)
+
+for src in folder_contents:
+    
+    dst = '..\\input\\' + src.split('..\\output\\')[1]
+    
+    shutil.move(src, dst)
+
+merge_coupon_ticket.wrapper(**parse_options)
+    
 print
 print 'move pyc files (byte code) from \code to \\temp'
     

@@ -429,13 +429,9 @@ def parse_csv(src, security, security_max, year, quarter):
     
     print 'save .bin to \\output'
     
-    if large_carrier_condition:
-        
-        dst = '..\\output\\' + 'coupon_' + str(year) + '_' + str(quarter) + '_LARGE_CARRIERS.bin'
-                    
-    else:
-        
-        dst = '..\\output\\' + 'coupon_' + str(year) + '_' + str(quarter) + '.bin'
+#    if large_carrier_condition == True, dst filename will not change    
+    
+    dst = '..\\output\\' + 'coupon_' + str(year) + '_' + str(quarter) + '.bin'
 
     print '[output] ' + dst
                             
@@ -476,9 +472,7 @@ def wrapper(test_run, security, security_max, test_periods, full_periods):
                 parse_csv(src, security, security_max, year, quarter)
                 
             except IOError:
-                
-#                this will also return an error if data_path_out does not exist
-                
+
                 raise IOError('requested data unavailable: year ' + str(year) + ', quarter ' + str(quarter))
     
     return None
