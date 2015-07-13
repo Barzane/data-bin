@@ -23,7 +23,7 @@ def compress(src, yyyy, q):
     route_level_dict = {}
     
     print 'creating route-level dictionary'
-    print '- remove all tickets with (nominal) ItinFare <$20'
+    print '- remove all tickets with (nominal) ItinFare < $20'
     
     t_start = segment_timer.timer(True)
     
@@ -77,7 +77,7 @@ def compress(src, yyyy, q):
     
     route_level_dict_3 = {}
     
-    print '- remove all tickets with (nominal) ItinFare >99th percentile of route-carrier-quarter fare distribution'
+    print '- remove all tickets with (nominal) ItinFare > 99th percentile of route-carrier-quarter fare distribution'
     
     t_start = segment_timer.timer(True)
             
@@ -247,16 +247,14 @@ def compress(src, yyyy, q):
     
     route_level_dict_6 = {}
     
-    print '- remove all route-carriers with < 100 passengers'
+    print '- remove all route-carriers with < 100 passengers in quarter'
     
     t_start = segment_timer.timer(True)
     
     for j in route_carrier_list:
         
         low_volume = (len(route_level_dict_5[j][2]) < 100)
-    
-#        remove route-carriers with <100 passengers in quarter, in DB1B
-        
+            
         if not low_volume:
             
             route_level_dict_6[j] = route_level_dict_5[j]
