@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
-import time, segment_timer, os
+import time, os
+
+import segment_timer
 
 def sort_coupon_csv(dst_csv_2011q1_to_2013q4_temp, dst_csv, year, quarter):
     

@@ -265,7 +265,7 @@ def compress(src, yyyy, q):
     
     print '# route-carriers', len(route_level_dict_6.keys())
     
-    dst_route_carrier = '..\\output\\routecarrier_' + str(yyyy) + '_' + str(q) + '.bin'
+    dst_route_carrier = '..\\temp\\routecarrier_' + str(yyyy) + '_' + str(q) + '.bin'
     
     print 'saving: ' + dst_route_carrier
     

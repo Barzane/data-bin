@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
-import time, safe_cPickle, segment_timer, os, zipfile, shutil
+import time, os, zipfile, shutil
+
+import safe_cPickle, segment_timer
 
 def parse_csv(src, security, security_max, year, quarter):
    

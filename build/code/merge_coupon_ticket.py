@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
-import cPickle, copy, segment_timer
+import cPickle, copy
 
+import segment_timer
 import cpi_parse
 
 def merge(src_coupon, src_ticket, yyyy, q):
