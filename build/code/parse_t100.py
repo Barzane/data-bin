@@ -214,7 +214,9 @@ def parse(src, year):
                         if k in ['PASSENGERS', 'RAMP_TO_RAMP', 'AIR_TIME', 'SEATS', 'DEPARTURES_PERFORMED']:
                             
                             intermediate_dict[key][k].append(eval(line_data[header_list.index(k)]))
+                            
                         else:
+                            
                             intermediate_dict[key][k].append(line_data[header_list.index(k)])           
     
     f.close()
