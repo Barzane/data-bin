@@ -14,7 +14,7 @@ def manual_transfer_reminder():
     print 'manually transfer .zip datafiles to data\\DB1BXXXXXX before continuing'
     print 'e.g. Origin_and_Destination_Survey_DB1BXXXXXXX_2010_1.zip'
     print
-    print '** disk space requirement: at least 2-3 GB (one unzipped Coupon csv) **'
+    print '** DISK SPACE REQUIREMENT: ~ 4 GB for 10 quarter parse (temp/ files) **'
     print
     
     raw_input('press a key to continue')
