@@ -46,18 +46,18 @@ def add_to_b(next_line_list):
 def parse(src, year):
    
     assert isinstance(src, str), 'src must be a string'
-    assert isinstance(src, year), 'year must be an integer'
+    assert isinstance(year, int), 'year must be an integer'
 
     error_string = ''
     
     print    
     print '[source] ' + src
     
-    dst_folder = '..\\temp\\' + str(year) + '_T100D_SEGMENT_ALL_CARRIER.csv'
+    dst_folder = '..\\input\\' + str(year) + '_T100D_SEGMENT_ALL_CARRIER_FOLDER.csv'
 
     t_unzip_csv_start = segment_timer.timer(True)
 
-    print 'unzipping folder to \\temp'
+    print 'unzipping folder to \\input'
     
     print '[destination] ' + dst_folder
     
@@ -66,13 +66,13 @@ def parse(src, year):
     zip.close()
     
     src_csv = dst_folder + '\\' + str(year) + '_T100D_SEGMENT_ALL_CARRIER.csv'    
-    dst_csv = '..\\input\\' + str(year) + '_T100D_SEGMENT_ALL_CARRIER.csv'
+    dst_csv = '..\\temp\\' + str(year) + '_T100D_SEGMENT_ALL_CARRIER.csv'
         
-    print 'copying .csv from \\temp to \\input'
+    print 'copying .csv from \\input (folder) to \\temp'
         
     shutil.move(src_csv, dst_csv)
     
-    print 'deleting redundant folder from \\temp'
+    print 'deleting redundant folder from \\input'
 
     shutil.rmtree(dst_folder)
     

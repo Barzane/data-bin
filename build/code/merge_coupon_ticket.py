@@ -162,7 +162,7 @@ def merge(src_coupon, src_ticket, yyyy, q):
     
     del output_explode_passengers['Passengers']
     
-    dst_itinerary = '..\\output\\itinerary_' + str(yyyy) + '_' + str(q) + '.bin'
+    dst_itinerary = '..\\temp\\itinerary_' + str(yyyy) + '_' + str(q) + '.bin'
 
     f = open(dst_itinerary, 'wb')
     
@@ -195,8 +195,8 @@ def wrapper(test_run, test_periods, full_periods, security = None, security_max 
     for year in year_list:
         for quarter in quarter_list:
 
-            src_coupon = '..\\input\\coupon_' + str(year) + '_' + str(quarter) + '.bin'
-            src_ticket = '..\\input\\ticket_' + str(year) + '_' + str(quarter) + '.bin'
+            src_coupon = '..\\temp\\coupon_' + str(year) + '_' + str(quarter) + '.bin'
+            src_ticket = '..\\temp\\ticket_' + str(year) + '_' + str(quarter) + '.bin'
             
             try:
                             

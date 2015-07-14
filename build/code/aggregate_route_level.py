@@ -297,7 +297,7 @@ def wrapper(test_run, test_periods, full_periods, security = None, security_max 
     for year in year_list:
         for quarter in quarter_list:
 
-            src_itinerary = '..\\input\\itinerary_' + str(year) + '_' + str(quarter) + '.bin'
+            src_itinerary = '..\\temp\\itinerary_' + str(year) + '_' + str(quarter) + '.bin'
             
             try:
                             

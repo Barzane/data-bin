@@ -14,11 +14,11 @@ def parse_csv(src, security, security_max, year, quarter):
     print    
     print '[source] ' + src
     
-    dst_folder = '..\\temp\\Origin_and_Destination_Survey_DB1BTicket_' + str(year) + '_' + str(quarter) + '.csv'
+    dst_folder = '..\\input\\Origin_and_Destination_Survey_DB1BTicket_' + str(year) + '_' + str(quarter) + '_FOLDER.csv'
 
     t_unzip_csv_start = segment_timer.timer(True)
 
-    print 'unzipping folder to \\temp'
+    print 'unzipping folder to \\input'
     
     print '[destination] ' + dst_folder
     
@@ -27,13 +27,13 @@ def parse_csv(src, security, security_max, year, quarter):
     zip.close()
     
     src_csv = dst_folder + '\\Origin_and_Destination_Survey_DB1BTicket_' + str(year) + '_' + str(quarter) + '.csv'    
-    dst_csv = '..\\input\\Origin_and_Destination_Survey_DB1BTicket_' + str(year) + '_' + str(quarter) + '.csv'
+    dst_csv = '..\\temp\\Origin_and_Destination_Survey_DB1BTicket_' + str(year) + '_' + str(quarter) + '.csv'
         
-    print 'copying .csv from \\temp to \\input'
+    print 'copying .csv from \\input (folder) to \\temp'
         
     shutil.move(src_csv, dst_csv)
     
-    print 'deleting redundant folder from \\temp'
+    print 'deleting redundant folder from \\input'
 
     shutil.rmtree(dst_folder)    
     
@@ -185,11 +185,11 @@ def parse_csv(src, security, security_max, year, quarter):
     
 #    safe_cPickle Python dictionary ticket_year_quarter
     
-    print 'save .bin to \\output'
+    print 'save .bin to \\temp'
         
-    dst = '..\\output\\' + 'ticket_' + str(year) + '_' + str(quarter) + '.bin'
+    dst = '..\\temp\\' + 'ticket_' + str(year) + '_' + str(quarter) + '.bin'
 
-    print '[output] ' + dst
+    print '[temp] ' + dst
                             
     safe_cPickle.safe_cPickle_dump(dst, data_itin_dict)
     
@@ -200,7 +200,7 @@ def parse_csv(src, security, security_max, year, quarter):
     
     data_reader.close()
     
-    print 'deleting .csv file from \\input'
+    print 'deleting .csv file from \\temp'
     
     os.remove(dst_csv)
     
