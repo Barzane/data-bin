@@ -268,7 +268,7 @@ def parse(src, year):
     cPickle.dump(data_dict, f)
     f.close()
 
-    dst_error = '..\\temp\\error_string.txt'
+    dst_error = '..\\temp\\error_string_' + str(year) + '.txt'
     
     if error_string != '':
         
