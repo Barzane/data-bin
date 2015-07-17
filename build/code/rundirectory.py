@@ -15,6 +15,7 @@ def manual_transfer_reminder():
     print 'e.g. Origin_and_Destination_Survey_DB1BXXXXXXX_2010_1.zip'
     print
     print '** DISK SPACE REQUIREMENT: ~ 4 GB for 10 quarter parse (temp/ files) **'
+    print '** T100 datafiles must be manually renamed after download from U.S. DOT **'
     print
     
     raw_input('press a key to continue')

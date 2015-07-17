@@ -276,7 +276,7 @@ def parse(src, year):
         f.write(error_string)
         f.close()
 
-    print 'deleting redundant file from \\input: ' + dst_csv
+    print 'deleting redundant file from \\temp: ' + dst_csv
     
     os.remove(dst_csv)
 

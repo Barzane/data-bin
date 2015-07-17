@@ -31,7 +31,11 @@ def parse_csv(src, security, security_max, year, quarter):
     dst_csv = '..\\temp\\Origin_and_Destination_Survey_DB1BCoupon_' + str(year) + '_' + str(quarter) + '.csv'
     dst_csv_2011q1_to_2013q4_temp = '..\\temp\\Origin_and_Destination_Survey_DB1BCoupon_' + str(year) + '_' + str(quarter) + '_UNSORTED.csv'
 
-    if year >= 2011:
+    if year >= 2014:
+        
+        raise Exception('sort not implemented', year)
+
+    if 2011 <= year <= 2013:
                 
         print '[sort csv for 2011Q1 to 2013Q4 inclusive]'
         print 'copying .csv from \\input (folder) to \\temp'
