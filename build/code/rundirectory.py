@@ -7,6 +7,7 @@ import parse_ticket_csv
 import merge_coupon_ticket
 import aggregate_route_level
 import parse_t100
+import parse_population_by_msa
 
 def manual_transfer_reminder():
 
@@ -75,6 +76,11 @@ print 'parse T-100 .csv files to .bin, save to \\temp'
 print '** note that raw T-100 .zip and .csv must be renamed as yyyy_*.* before use **'
 
 parse_t100.wrapper(**parse_options)
+
+print
+print 'parse regional population (by MSA) data'
+
+parse_population_by_msa.parse()
 
 print
 print 'move pyc files (byte code) from \code to \\temp'
