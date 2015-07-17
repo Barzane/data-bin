@@ -31,6 +31,7 @@ def clear_output_temp_input():
         folder_contents = glob.glob(folder)
     
         for filename in folder_contents:
+            
             os.remove(filename)
     
     return None
@@ -42,8 +43,8 @@ print 'clear contents of \output and \\temp and \input'
     
 clear_output_temp_input()
 
-test_run = True parses Coupon or Ticket for one quarter only
-security = True considers first (security_max) lines only
+print 'test_run = True parses Coupon or Ticket for one quarter only'
+print 'security = True considers first (security_max) lines only'
 
 parse_options = {}
 parse_options['test_run'] = True
@@ -98,6 +99,7 @@ for folder in [src + '*.pyc']:
     
     folder_contents = glob.glob(folder)
     
-    for filename in folder_contents:        
+    for filename in folder_contents:
+        
         filename_split = filename.split('\\')[-1]
         shutil.move(filename, dst + filename_split)
