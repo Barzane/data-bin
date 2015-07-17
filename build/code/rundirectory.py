@@ -8,6 +8,7 @@ import merge_coupon_ticket
 import aggregate_route_level
 import parse_t100
 import parse_population_by_msa
+import parse_airport_coordinates
 
 def manual_transfer_reminder():
 
@@ -81,6 +82,11 @@ print
 print 'parse regional population (by MSA) data'
 
 parse_population_by_msa.parse()
+
+print
+print 'parse airport coordinates'
+
+parse_airport_coordinates.parse()
 
 print
 print 'move pyc files (byte code) from \code to \\temp'
