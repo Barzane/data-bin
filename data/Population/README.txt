@@ -1,0 +1,1 @@
+- popDataFinal.txt is created manually from popDataFinal.xls (copy-paste into .txt)
