@@ -1,0 +1,1 @@
+- gdpDataFinal.txt is created manually from gdpDataFinal.xls (copy-paste into .txt)
