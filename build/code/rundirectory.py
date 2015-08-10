@@ -54,32 +54,32 @@ parse_options['security_max'] = 10000
 parse_options['test_periods'] = ([2010], [1])
 parse_options['full_periods'] = (xrange(1993, 2014, 1), xrange(1, 5))
 
-#print
-#print 'parse DB1B Coupon data from .zip to coupon_year_quarter.bin'
-#
-#parse_coupon_csv.wrapper(**parse_options)
-#
-#print
-#print 'parse DB1B Ticket data from .zip to coupon_year_quarter.bin'
-#
-#parse_ticket_csv.wrapper(**parse_options)
-#
-#print
-#print 'merge Coupon and Ticket .bin files to Itinerary'
-#
-#merge_coupon_ticket.wrapper(**parse_options)
-#
-#print
-#print 'aggregate itinerary*.bin to route-level'
-#
-#aggregate_route_level.wrapper(**parse_options)
-#
-#print
-#print 'parse T-100 .csv files to .bin, save to \\temp'
-#print '** note that raw T-100 .zip and .csv must be renamed as yyyy_*.* before use **'
-#
-#parse_t100.wrapper(**parse_options)
-#
+print
+print 'parse DB1B Coupon data from .zip to coupon_year_quarter.bin'
+
+parse_coupon_csv.wrapper(**parse_options)
+
+print
+print 'parse DB1B Ticket data from .zip to coupon_year_quarter.bin'
+
+parse_ticket_csv.wrapper(**parse_options)
+
+print
+print 'merge Coupon and Ticket .bin files to Itinerary'
+
+merge_coupon_ticket.wrapper(**parse_options)
+
+print
+print 'aggregate itinerary*.bin to route-level'
+
+aggregate_route_level.wrapper(**parse_options)
+
+print
+print 'parse T-100 .csv files to .bin, save to \\temp'
+print '** note that raw T-100 .zip and .csv must be renamed as yyyy_*.* before use **'
+
+parse_t100.wrapper(**parse_options)
+
 print
 print 'parse regional population (by MSA) data'
 
