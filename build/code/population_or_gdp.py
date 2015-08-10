@@ -17,8 +17,10 @@
 #    a = population_or_gdp.local_population('LGA')
 #    a = population_or_gdp.local_gdp('LGA')
 #
+#    a is a dictionary (key: year; value: local population or local GDP)
+#
 #If a is None returns False, we can use a
-#    (for LGA this returns 19813938 for population and XXX for GDP)
+#    (2013: for LGA this returns 19996 for population and 2623.93 for GDP)
 #
 #If a is None returns True, then the IATA code is not valid
 #    e.g. a = population.local_population('bert')
