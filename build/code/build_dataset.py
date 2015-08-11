@@ -7,6 +7,7 @@ import filter_t100_volume
 import add_mean_fares
 import add_percentiles
 import add_passengers
+import add_t100
 
 def build(year, quarter):
     
@@ -32,6 +33,7 @@ def build(year, quarter):
     data_hold = add_mean_fares.add(data_hold, route_carrier)
     data_hold = add_percentiles.add(data_hold, route_carrier, [25, 75, 50, 10, 90])
     data_hold = add_passengers.add(data_hold, route_carrier)
+    data_hold = add_t100.add(data_hold, T100)
     
     return data_hold
     
