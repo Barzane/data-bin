@@ -3,6 +3,7 @@
 import cPickle, copy
 
 import add_distance
+import filter_t100_volume
 
 def build(year, quarter):
     
@@ -22,7 +23,8 @@ def build(year, quarter):
     f.close()
     
     data_hold = dict([item, {}] for item in route_carrier)
-        
+    
+    data_hold = filter_t100_volume.filter(data_hold, T100)    
     data_hold = add_distance.add(data_hold, route_carrier)    
     
     return data_hold

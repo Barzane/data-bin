@@ -115,3 +115,11 @@ for folder in [src + '*.pyc']:
         
         filename_split = filename.split('\\')[-1]
         shutil.move(filename, dst + filename_split)
+
+print
+print 'remove test code'
+import cPickle
+f = open('..\\output\\data_2010_1.bin', 'rb')
+data = cPickle.load(f)
+f.close()
+print data
