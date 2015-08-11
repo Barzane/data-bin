@@ -10,6 +10,7 @@ import parse_t100
 import parse_population_by_msa
 import parse_airport_coordinates
 import parse_gdp_by_msa
+import build_dataset
 
 def manual_transfer_reminder():
 
@@ -37,12 +38,12 @@ def clear_output_temp_input():
     
     return None
     
-manual_transfer_reminder()
-
-print
-print 'clear contents of \output and \\temp and \input'
-    
-clear_output_temp_input()
+#manual_transfer_reminder()
+#
+#print
+#print 'clear contents of \output and \\temp and \input'
+#    
+#clear_output_temp_input()
 
 print 'test_run = True parses Coupon or Ticket for one quarter only'
 print 'security = True considers first (security_max) lines only'
@@ -54,15 +55,15 @@ parse_options['security_max'] = 10000
 parse_options['test_periods'] = ([2010], [1])
 parse_options['full_periods'] = (xrange(1993, 2014, 1), xrange(1, 5))
 
-print
-print 'parse DB1B Coupon data from .zip to coupon_year_quarter.bin'
-
-parse_coupon_csv.wrapper(**parse_options)
-
-print
-print 'parse DB1B Ticket data from .zip to coupon_year_quarter.bin'
-
-parse_ticket_csv.wrapper(**parse_options)
+#print
+#print 'parse DB1B Coupon data from .zip to coupon_year_quarter.bin'
+#
+#parse_coupon_csv.wrapper(**parse_options)
+#
+#print
+#print 'parse DB1B Ticket data from .zip to coupon_year_quarter.bin'
+#
+#parse_ticket_csv.wrapper(**parse_options)
 
 print
 print 'merge Coupon and Ticket .bin files to Itinerary'
@@ -94,6 +95,11 @@ print
 print 'parse regional GDP (by MSA) data'
 
 parse_gdp_by_msa.parse()
+
+print
+print 'augment data dictionary'
+
+build_dataset.wrapper(**parse_options)
 
 print
 print 'move pyc files (byte code) from \code to \\temp'

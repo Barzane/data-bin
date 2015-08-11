@@ -4,8 +4,8 @@ import time, os, zipfile, shutil
 
 import safe_cPickle, segment_timer
 
-def parse_csv(src, security, security_max, year, quarter):
-   
+def parse_csv(src, security, security_max, year, quarter):    
+    
     assert isinstance(src, str), 'src must be a string'
     assert isinstance(security, bool), 'security must be a Boolean'
     assert ((security_max > 0) and isinstance(security_max, int)),\
