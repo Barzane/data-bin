@@ -10,6 +10,7 @@ import add_passengers
 import add_t100
 import add_population
 import add_herfindahl
+import add_route_market_share
 
 def build(year, quarter):
     
@@ -38,6 +39,7 @@ def build(year, quarter):
     data_hold = add_t100.add(data_hold, T100)
     data_hold = add_population.add(data_hold)
     data_hold = add_herfindahl.add(data_hold)
+    data_hold = add_route_market_share.add(data_hold)
     
     return data_hold
     

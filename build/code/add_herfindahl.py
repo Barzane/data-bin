@@ -2,32 +2,14 @@
 
 import scipy
 
-def build_hhi_dict_db1b(data_hold):
-            
-    hhi_dict_db1b = {}
-
-    for key in data_hold:
-        
-        list_v = key.split('_')
-        origin = list_v[0]
-        destination = list_v[1]
-        
-        if origin + '_' + destination not in hhi_dict_db1b:
-            
-            hhi_dict_db1b[origin + '_' + destination] = [data_hold[key]['pax']]
-            
-        else:
-            
-            hhi_dict_db1b[origin + '_' + destination].append(data_hold[key]['pax'])           
-    
-    return hhi_dict_db1b
+import route_pax
             
 def add(data_hold):
     
     print
     print 'add Herfindahl index' 
 
-    hhi_dict_db1b = build_hhi_dict_db1b(data_hold)
+    hhi_dict_db1b = route_pax.build_hhi_dict_db1b(data_hold)
     
     hhi_dict_db1b_2 = {}
 
