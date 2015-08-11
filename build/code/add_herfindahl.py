@@ -11,7 +11,6 @@ def build_hhi_dict_db1b(data_hold):
         list_v = key.split('_')
         origin = list_v[0]
         destination = list_v[1]
-        carrier = list_v[2]
         
         if origin + '_' + destination not in hhi_dict_db1b:
             
