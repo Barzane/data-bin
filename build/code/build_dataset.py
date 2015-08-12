@@ -13,12 +13,20 @@ import add_herfindahl
 import add_route_market_share
 import add_temperature
 import add_airport_market_share
+import add_gdp
 
 def build(year, quarter):
     
     src_t100 = '..\\temp\\T100_merge_' + str(year) + '.bin'
     src_route_carrier = '..\\temp\\routecarrier_' + str(year) + '_' + str(quarter) + '.bin'
+    src_cpi = '..\\temp\\CPI2013Q4_dict.bin'
+    
+    print 'loading' + src_cpi
 
+    f = open(src_cpi, 'rb')
+    CPI2013Q4Dict = cPickle.load(f)
+    f.close()    
+    
     print 'loading ' + src_t100
     
     f = open(src_t100, 'rb')
@@ -44,6 +52,7 @@ def build(year, quarter):
     data_hold = add_route_market_share.add(data_hold)
     data_hold = add_temperature.add(data_hold)
     data_hold = add_airport_market_share.add(data_hold)    
+    data_hold = add_gdp.add(data_hold, CPI2013Q4Dict)
     
     return data_hold
     
