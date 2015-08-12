@@ -4,22 +4,27 @@ import cPickle
 
 import state_map
 import parse_airport_state
+import parse_temperature
 
 def add(data_hold):
     
     parse_airport_state.parse()    
+    parse_temperature.parse()    
     
     print
     print 'add temperature differential (Fahrenheit)'
     
-#    f = open('../Climate/tavg.bin', 'rb')
-#    temp_dict = cPickle.load(f)
-#    f.close()
-#
-#    f = open('../Climate/airportState.bin', 'rb')
-#    state_dict = cPickle.load(f)
-#    f.close()
-#    
+    src_airport_state = '..\\temp\\airportState.bin'
+    src_temperature = '..\\temp\\tavg.bin'
+    
+    f = open(src_temperature, 'rb')
+    temp_dict = cPickle.load(f)
+    f.close()
+
+    f = open(src_airport_state, 'rb')
+    state_dict = cPickle.load(f)
+    f.close()
+    
 #    statemap = state_map.build()
 #    
 #    qm = {1: '01', 2: '04', 3: '07',4: '10'}            

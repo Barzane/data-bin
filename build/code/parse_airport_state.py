@@ -8,12 +8,14 @@ def parse():
     dst = '..\\input\\airportStateCSV.csv'   
     dst_airport_state_bin = '..\\temp\\airportState.bin'   
     
+    print
     print 'copying airport state data'
     print 'from', src
     print 'to', dst
     
     shutil.copy(src, dst)
     
+    print
     print 'parsing airport state data, save .bin to \\temp'    
     
     f = open(dst, 'r')
