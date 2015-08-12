@@ -12,6 +12,7 @@ import add_population
 import add_herfindahl
 import add_route_market_share
 import add_temperature
+import add_airport_market_share
 
 def build(year, quarter):
     
@@ -42,6 +43,7 @@ def build(year, quarter):
     data_hold = add_herfindahl.add(data_hold)
     data_hold = add_route_market_share.add(data_hold)
     data_hold = add_temperature.add(data_hold)
+    data_hold = add_airport_market_share.add(data_hold)    
     
     return data_hold
     
