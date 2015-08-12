@@ -15,6 +15,7 @@ import add_temperature
 import add_airport_market_share
 import add_gdp
 import add_southwest_indicator
+import add_airport_coords
 
 def build(year, quarter):
     
@@ -42,7 +43,8 @@ def build(year, quarter):
     
     data_hold = dict([item, {}] for item in route_carrier)
     
-    data_hold = filter_t100_volume.filter(data_hold, T100)    
+    data_hold = filter_t100_volume.filter(data_hold, T100)
+    
     data_hold = add_distance.add(data_hold, route_carrier)
     data_hold = add_mean_fares.add(data_hold, route_carrier)
     data_hold = add_percentiles.add(data_hold, route_carrier, [25, 75, 50, 10, 90])
@@ -55,6 +57,7 @@ def build(year, quarter):
     data_hold = add_airport_market_share.add(data_hold)    
     data_hold = add_gdp.add(data_hold, CPI2013Q4Dict)
     data_hold = add_southwest_indicator.add(data_hold)
+    data_hold = add_airport_coords.add(data_hold)
     
     return data_hold
     
