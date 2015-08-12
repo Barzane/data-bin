@@ -41,7 +41,7 @@ def build(year, quarter):
     data_hold = add_population.add(data_hold)
     data_hold = add_herfindahl.add(data_hold)
     data_hold = add_route_market_share.add(data_hold)
-#    data_hold = add_temperature.add(data_hold)
+    data_hold = add_temperature.add(data_hold)
     
     return data_hold
     
@@ -67,7 +67,7 @@ def wrapper(test_run, test_periods, full_periods, security = None, security_max 
                     
             except IOError:
     
-                raise IOError('requested data unavailable: year ' + str(year) + ' , quarter ' + str(quarter))
+                raise IOError('data unavailable: year ' + str(year) + ' , quarter ' + str(quarter))
     
             var_list = copy.deepcopy(data_hold[data_hold.keys()[0]].keys())
             var_list.sort()
