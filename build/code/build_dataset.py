@@ -14,6 +14,7 @@ import add_route_market_share
 import add_temperature
 import add_airport_market_share
 import add_gdp
+import add_southwest_indicator
 
 def build(year, quarter):
     
@@ -53,6 +54,7 @@ def build(year, quarter):
     data_hold = add_temperature.add(data_hold)
     data_hold = add_airport_market_share.add(data_hold)    
     data_hold = add_gdp.add(data_hold, CPI2013Q4Dict)
+    data_hold = add_southwest_indicator.add(data_hold)
     
     return data_hold
     
