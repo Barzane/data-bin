@@ -17,8 +17,9 @@ import add_gdp
 import add_southwest_indicator
 import add_airport_coords
 import add_large_airport
+import add_time
 
-def build(year, quarter):
+def build(year, quarter, t_count):
     
     src_t100 = '..\\temp\\T100_merge_' + str(year) + '.bin'
     src_route_carrier = '..\\temp\\routecarrier_' + str(year) + '_' + str(quarter) + '.bin'
@@ -60,6 +61,7 @@ def build(year, quarter):
     data_hold = add_southwest_indicator.add(data_hold)
     data_hold = add_airport_coords.add(data_hold)
     data_hold = add_large_airport.add(data_hold)
+    data_hold = add_time.add(data_hold, t_count)
     
     return data_hold
     
@@ -75,13 +77,15 @@ def wrapper(test_run, test_periods, full_periods, security = None, security_max 
         year_list = full_periods[0]
         quarter_list = full_periods[1]
     
+    t_count = 0    
+    
     for year in year_list:
         
         for quarter in quarter_list:
             
             try:
                                 
-                data_hold = build(year, quarter)
+                data_hold = build(year, quarter, t_count)
                     
             except IOError:
     
@@ -95,5 +99,7 @@ def wrapper(test_run, test_periods, full_periods, security = None, security_max 
             f = open(dst_data, 'wb')
             cPickle.dump(data_hold, f)
             f.close()
+            
+            t_count += 1
     
     return None
