@@ -1,0 +1,1 @@
+- airportStateCSV.csv is created manually from airportState.xls (save as .csv)

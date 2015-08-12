@@ -3,8 +3,11 @@
 import cPickle
 
 import state_map
+import parse_airport_state
 
 def add(data_hold):
+    
+    parse_airport_state.parse()    
     
     print
     print 'add temperature differential (Fahrenheit)'
