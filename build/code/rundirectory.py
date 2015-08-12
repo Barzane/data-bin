@@ -11,6 +11,7 @@ import parse_population_by_msa
 import parse_airport_coordinates
 import parse_gdp_by_msa
 import build_dataset
+import convert_bin_to_text
 
 def manual_transfer_reminder():
 
@@ -97,9 +98,14 @@ print 'parse regional GDP (by MSA) data'
 parse_gdp_by_msa.parse()
 
 print
-print 'augment data dictionary'
+print 'filter + add variables to data dictionary'
 
 build_dataset.wrapper(**parse_options)
+
+print
+print 'convert .bin to .txt'
+
+convert_bin_to_text.wrapper(**parse_options)
 
 print
 print 'move pyc files (byte code) from \code to \\temp'

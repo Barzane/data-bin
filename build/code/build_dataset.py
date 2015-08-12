@@ -91,9 +91,6 @@ def wrapper(test_run, test_periods, full_periods, security = None, security_max 
     
                 raise IOError('data unavailable: year ' + str(year) + ' , quarter ' + str(quarter))
     
-            var_list = copy.deepcopy(data_hold[data_hold.keys()[0]].keys())
-            var_list.sort()
-    
             dst_data = '..\\output\\data_' + str(year) + '_' + str(quarter) + '.bin'  
     
             f = open(dst_data, 'wb')
