@@ -10,8 +10,6 @@ import parse_t100
 import parse_population_by_msa
 import parse_airport_coordinates
 import parse_gdp_by_msa
-import build_dataset
-import convert_bin_to_text
 
 def manual_transfer_reminder():
 
@@ -96,6 +94,9 @@ print
 print 'parse regional GDP (by MSA) data'
 
 parse_gdp_by_msa.parse()
+
+import build_dataset
+import convert_bin_to_text
 
 print
 print 'filter + add variables to data dictionary'
