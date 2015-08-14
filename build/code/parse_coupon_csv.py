@@ -4,6 +4,7 @@ import time, os, zipfile, shutil
 
 import safe_cPickle, segment_timer
 import sort_coupon_csv_2011_on
+import coupon_descriptives
 
 def parse_csv(src, security, security_max, year, quarter):
     
@@ -452,6 +453,12 @@ def parse_csv(src, security, security_max, year, quarter):
     print 'deleting .csv file from \\temp'
     
     os.remove(dst_csv)
+    
+#    descriptive statistics for 2013Q4 (any quarter can be called)    
+    
+    if (year == 2013) and (quarter == 4):    
+        
+        coupon_descriptives.compute(year, quarter)
     
     return None
 
