@@ -27,7 +27,7 @@ def add(data_hold):
     
     statemap = state_map.build()
     
-    qm = {1: '01', 2: '04', 3: '07',4: '10'}            
+    qm = {1: '01', 2: '04', 3: '07', 4: '10'}            
     
     for key in data_hold:
         
