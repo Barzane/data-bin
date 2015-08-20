@@ -42,6 +42,8 @@ def merge(src_coupon, src_ticket, yyyy, q):
     coupon_length = len(coupon[coupon.keys()[0]])
     ticket_length = len(ticket[ticket.keys()[0]])
     
+    del coupon    
+    
     ticket_dict = {}
     dollar_cred_dict = {}
     bulk_fare_dict = {}
@@ -57,6 +59,8 @@ def merge(src_coupon, src_ticket, yyyy, q):
         bulk_fare_dict[ticket['ItinID'][i]] = int(ticket['BulkFare'][i])
     
     print '%0.3f seconds '%(segment_timer.timer(False, t_start))
+
+    del ticket
     
     if len(ticket_dict) != ticket_length:
         raise Exception('duplicate key in ticketDict')
@@ -103,6 +107,8 @@ def merge(src_coupon, src_ticket, yyyy, q):
 #            fare not credible (DollarCred = 0)
             count_remove += 1
 
+    del output
+
     output = copy.deepcopy(output2)
     
     del output2    
@@ -137,6 +143,8 @@ def merge(src_coupon, src_ticket, yyyy, q):
 #            bulk fare (BulkFare = 1)
             count_remove += 1
 
+    del output
+
     output = copy.deepcopy(output2)
     
     del output2    
@@ -160,6 +168,8 @@ def merge(src_coupon, src_ticket, yyyy, q):
                 
                 output_explode_passengers[key].append(output[key][i])
     
+    del output    
+    
     del output_explode_passengers['Passengers']
     
     dst_itinerary = '..\\temp\\itinerary_' + str(yyyy) + '_' + str(q) + '.bin'
@@ -171,6 +181,8 @@ def merge(src_coupon, src_ticket, yyyy, q):
     t_start = segment_timer.timer(True)
     
     cPickle.dump(output_explode_passengers, f)
+
+    del output_explode_passengers
 
     print '%0.3f seconds '%(segment_timer.timer(False, t_start))
     
