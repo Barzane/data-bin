@@ -9,6 +9,7 @@ def merge(src_coupon, src_ticket, yyyy, q):
     
     t_start_total = segment_timer.timer(True)
     
+    print
     print '[loading] ' + src_ticket
     
     t_start = segment_timer.timer(True)
