@@ -43,8 +43,6 @@ def compress(src, yyyy, q):
     
         key = (route[0] + '_' + route[1] + '_' + opcarrier +
             '_' + year + '_' + quarter)
-        
-        item = []
     
         distance = itinerary['Distance'][i]
         tkcarrier = itinerary['TkCarrier'][i]
@@ -71,6 +69,8 @@ def compress(src, yyyy, q):
     print '%0.3f seconds '%(segment_timer.timer(False, t_start))
     
     print '# route-carriers', len(route_level_dict.keys())
+    
+    del itinerary
     
     route_level_dict_2 = copy.deepcopy(route_level_dict)
     
@@ -280,6 +280,8 @@ def compress(src, yyyy, q):
     
     print 'total time:'
     print '%0.3f seconds '%(segment_timer.timer(False, t_start_total))
+
+    del route_level_dict_6
 
     return None
 
