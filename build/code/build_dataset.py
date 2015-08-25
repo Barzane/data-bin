@@ -92,6 +92,9 @@ def wrapper(test_run, test_periods, full_periods, security = None, security_max 
                 raise IOError('data unavailable: year ' + str(year) + ' , quarter ' + str(quarter))
     
             dst_data = '..\\output\\data_' + str(year) + '_' + str(quarter) + '.bin'  
+
+            print 'saving', dst_data
+            print
     
             f = open(dst_data, 'wb')
             cPickle.dump(data_hold, f)
