@@ -28,6 +28,7 @@ def parse():
     
     print
     print 'parsing temperature data, save .bin to \\temp'
+    print
     
     data_dict = {}
     
