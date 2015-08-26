@@ -108,11 +108,11 @@ parse_options['full_periods'] = (xrange(1993, 2014, 1), xrange(1, 5))
 #print 'convert .bin to .txt'
 #
 #convert_bin_to_text.wrapper(**parse_options)
-
-print
-print 'merge .bin files'
-
-merge_bin.wrapper(**parse_options)
+#
+#print
+#print 'merge .bin files'
+#
+#merge_bin.wrapper(**parse_options)
 
 print
 print 'move pyc files (byte code) from \code to \\temp'
