@@ -11,6 +11,7 @@ import parse_population_by_msa
 import parse_airport_coordinates
 import parse_gdp_by_msa
 import merge_bin
+import data_full_bin_descriptives
 
 def manual_transfer_reminder():
 
@@ -113,6 +114,11 @@ parse_options['full_periods'] = (xrange(1993, 2014, 1), xrange(1, 5))
 #print 'merge .bin files'
 #
 #merge_bin.wrapper(**parse_options)
+
+print
+print 'results for text and table of summary statistics'
+
+data_full_bin_descriptives.compute()
 
 print
 print 'move pyc files (byte code) from \code to \\temp'
