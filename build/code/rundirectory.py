@@ -118,7 +118,7 @@ parse_options['full_periods'] = (xrange(1993, 2014, 1), xrange(1, 5))
 print
 print 'results for text and table of summary statistics'
 
-data_full_bin_descriptives.compute()
+data_full_bin_descriptives.wrapper(**parse_options)
 
 print
 print 'move pyc files (byte code) from \code to \\temp'

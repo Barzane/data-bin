@@ -2,15 +2,13 @@
 
 import cPickle, numpy, copy, operator
 
-import evans_kessides_iv
-
 def add_dummies(year, quarter):
 
-    src = '..\\temp\\data_' + str(year) + '_' + str(quarter) + '.bin'
-    dst = '..\\temp\\data_' + str(year) + '_' + str(quarter) + '.bin'
-    
-    dst_route_carrier_mktshr = '..\\temp\\route_carrier_mktshr_' + str(year) + '_' + str(quarter) + '.bin'
-    
+    src = '..\\output\\data_' + str(year) + '_' + str(quarter) + '.bin'
+
+    print
+    print 'loading', src
+        
     f = open(src, 'rb')
     data = cPickle.load(f)
     f.close()
@@ -47,17 +45,7 @@ def add_dummies(year, quarter):
         chk_sum = sum(route_carrier_mktshr[route].values())
         
         if (chk_sum - 1.0) > 0.00000001:
-            print 'error', route, carrier, chk_sum
-            sss
-    
-#    save route_carrier_mktshr to /build/temp
-#    to be used in Evans & Kessides (1993) IV construction
-    
-    print 'saving ' + dst_route_carrier_mktshr    
-    
-    f = open(dst_route_carrier_mktshr, 'wb')
-    cPickle.dump(route_carrier_mktshr, f)
-    f.close()
+            raise Exception ('error', route, carrier, chk_sum)
     
     monopoly_route = {}
     duopoly_route = {}
@@ -112,37 +100,19 @@ def add_dummies(year, quarter):
              numpy.array(competitive_route.values()), numpy.ones(len(monopoly_route)))
     
     if not test_fn:
-        print 'error in dummy variables: not exhaustive'
-        sss
-    
-    for key in data:
-        
-        data_s = key.split('_')
-        origin = data_s[0]
-        dest = data_s[1]
-        carrier = data_s[2]
-        
-        route = origin + '_' + dest
-        
-        data[key]['monopoly'] = monopoly_route[route]
-        data[key]['duopoly'] = duopoly_route[route]
-        data[key]['competitive'] = competitive_route[route]
+        raise Exception('error in dummy variables: not exhaustive')
     
     nb_routes = len(monopoly_route)
     nb_monopoly_routes = monopoly_route.values().count(1.0)
     nb_duopoly_routes = duopoly_route.values().count(1.0)
     nb_competitive_routes = competitive_route.values().count(1.0)
     
+    print
+    print 'year', year, 'quarter', quarter
+    print
     print '\t' + 'number of routes', nb_routes
     print '\t' + 'number of monopoly routes', nb_monopoly_routes, str(100*float(nb_monopoly_routes)/nb_routes)+'%'
     print '\t' + 'number of duopoly routes', nb_duopoly_routes, str(100*float(nb_duopoly_routes)/nb_routes)+'%'
     print '\t' + 'number of competitive routes', nb_competitive_routes, str(100*float(nb_competitive_routes)/nb_routes)+'%'
     
-    f = open(dst, 'wb')
-    cPickle.dump(data, f)
-    f.close()
-    
-    print '[competitive_dummy.py] add Evans & Kessides (1993) IV to data_year_quarter.bin, save to \\temp'
-    evans_kessides_iv.add_iv(year, quarter)
-    
-    return None
+    return monopoly_route
