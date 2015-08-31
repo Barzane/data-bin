@@ -115,4 +115,4 @@ def add_dummies(year, quarter):
     print '\t' + 'number of duopoly routes', nb_duopoly_routes, str(100*float(nb_duopoly_routes)/nb_routes)+'%'
     print '\t' + 'number of competitive routes', nb_competitive_routes, str(100*float(nb_competitive_routes)/nb_routes)+'%'
     
-    return monopoly_route
+    return monopoly_route, competitive_route

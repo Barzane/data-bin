@@ -13,7 +13,7 @@ def weighted_avg_and_std(values, weights):
     
     return (average, math.sqrt(variance))
         
-def compute(dummy_dict):
+def compute(monopoly_dict, competitive_dict):
 
     src = '..\\output\\data_full.bin'
     
@@ -55,6 +55,8 @@ def compute(dummy_dict):
     distance_list_2013 = []
     pax_list_monop = []
     distance_list_monop = []
+    pax_list_comp = []
+    distance_list_comp = []
     
     pax_hhi = {}
     hhi = {}
@@ -66,24 +68,29 @@ def compute(dummy_dict):
     hhi_2013 = {}
     pax_hhi_monop = {}
     hhi_monop = {}
+    pax_hhi_comp = {}
+    hhi_comp = {}
     
     temp = {}
     temp_legacy = {}
     temp_1999 = {}
     temp_2013 = {}
     temp_monop = {}
+    temp_comp = {}
     
     gdp = {}
     gdp_legacy = {}
     gdp_1999 = {}
     gdp_2013 = {}
     gdp_monop = {}
+    gdp_comp = {}
 
     seats = {}
     seats_legacy = {}
     seats_1999 = {}
     seats_2013 = {}
     seats_monop = {}
+    seats_comp = {}
     
     legacy = ['AA', 'CO', 'DL', 'NW', 'TW', 'UA', 'US']
     
@@ -126,6 +133,7 @@ def compute(dummy_dict):
             pax_hhi_1999[quarter] = []
             pax_hhi_2013[quarter] = []
             pax_hhi_monop[quarter] = []
+            pax_hhi_comp[quarter] = []
             
         if quarter not in hhi:
             
@@ -134,24 +142,28 @@ def compute(dummy_dict):
             hhi_1999[quarter] = []
             hhi_2013[quarter] = []
             hhi_monop[quarter] = []
+            hhi_comp[quarter] = []
             
             temp[quarter] = []
             temp_legacy[quarter] = []
             temp_1999[quarter] = []
             temp_2013[quarter] = []
             temp_monop[quarter] = []
+            temp_comp[quarter] = []
             
             gdp[quarter] = []
             gdp_legacy[quarter] = []
             gdp_1999[quarter] = []
             gdp_2013[quarter] = []
             gdp_monop[quarter] = []
+            gdp_comp[quarter] = []
             
             seats[quarter] = []
             seats_legacy[quarter] = []
             seats_1999[quarter] = []
             seats_2013[quarter] = []
             seats_monop[quarter] = []
+            seats_comp[quarter] = []
         
         if carrier == 'WN':
             
@@ -220,7 +232,8 @@ def compute(dummy_dict):
             gdp_2013[quarter].append(data[key]['meanGDPperCapita'])
             seats_2013[quarter].append(data[key]['T100seats'])
 
-        monopoly = dummy_dict[str(year) + '_' + str(quarter)][route]
+        monopoly = monopoly_dict[str(year) + '_' + str(quarter)][route]
+        competitive = competitive_dict[str(year) + '_' + str(quarter)][route]
         
         if monopoly:
             
@@ -232,6 +245,17 @@ def compute(dummy_dict):
             temp_monop[quarter].append(data[key]['absTempDiff'])
             gdp_monop[quarter].append(data[key]['meanGDPperCapita'])
             seats_monop[quarter].append(data[key]['T100seats'])
+
+        if competitive:
+            
+            pax_list_comp.append(data[key]['pax'])
+            distance_list_comp.append(data[key]['distance'])
+            
+            pax_hhi_comp[quarter].append(data[key]['pax'])
+            hhi_comp[quarter].append(data[key]['hhiDB1B'])
+            temp_comp[quarter].append(data[key]['absTempDiff'])
+            gdp_comp[quarter].append(data[key]['meanGDPperCapita'])
+            seats_comp[quarter].append(data[key]['T100seats'])
 
     year_list.sort()
     carrier_list.sort()
@@ -329,7 +353,7 @@ def compute(dummy_dict):
 #    print
 #    print airport_list
     
-    def print_output(title, full_sample, legacy, year_1999, year_2013, quarterly, monopoly):
+    def print_output(title, full_sample, legacy, year_1999, year_2013, quarterly, monopoly, competitive):
         
         if quarterly[0]:
             
@@ -374,6 +398,13 @@ def compute(dummy_dict):
             
             print '\t' + str(quarter), weighted_avg_and_std(monopoly[0][quarter], monopoly[1][quarter])
         
+        print
+
+        print '[competitive] ' + title
+        
+        for quarter in loop:
+            
+            print '\t' + str(quarter), weighted_avg_and_std(competitive[0][quarter], competitive[1][quarter])
         
         return None
     
@@ -385,6 +416,7 @@ def compute(dummy_dict):
     print_options['year_2013'] = ({'': distance_list_2013}, {'': pax_list_2013})
     print_options['quarterly'] = (False, [''], hhi.keys())
     print_options['monopoly'] = ({'': distance_list_monop}, {'': pax_list_monop})
+    print_options['competitive'] = ({'': distance_list_comp}, {'': pax_list_comp})
     
     print_output(**print_options)
     
@@ -396,6 +428,7 @@ def compute(dummy_dict):
     print_options['year_2013'] = (hhi_2013, pax_hhi_2013)
     print_options['quarterly'] = (True, [''], hhi.keys())
     print_options['monopoly'] = (hhi_monop, pax_hhi_monop)
+    print_options['competitive'] = (hhi_comp, pax_hhi_comp)
     
     print_output(**print_options)
     
@@ -407,6 +440,7 @@ def compute(dummy_dict):
     print_options['year_2013'] = (temp_2013, pax_hhi_2013)
     print_options['quarterly'] = (True, [''], hhi.keys())
     print_options['monopoly'] = (temp_monop, pax_hhi_monop)
+    print_options['competitive'] = (temp_comp, pax_hhi_comp)
     
     print_output(**print_options)
 
@@ -420,6 +454,8 @@ def compute(dummy_dict):
     gdp_2013_no_missing = {}
     pax_gdp_monop_no_missing = {}
     gdp_monop_no_missing = {}
+    pax_gdp_comp_no_missing = {}
+    gdp_comp_no_missing = {}
     
 #    GDP per capita can have missing values ('NA')    
     
@@ -440,6 +476,9 @@ def compute(dummy_dict):
         pax_gdp_monop_no_missing[quarter] = []
         gdp_monop_no_missing[quarter] = []
         
+        pax_gdp_comp_no_missing[quarter] = []
+        gdp_comp_no_missing[quarter] = []
+        
         if len(pax_hhi[quarter]) != len(gdp[quarter]):
             
             raise Exception('list lengths are not the same')
@@ -457,6 +496,10 @@ def compute(dummy_dict):
             raise Exception('list lengths are not the same')
             
         if len(pax_hhi_monop[quarter]) != len(gdp_monop[quarter]):
+            
+            raise Exception('list lengths are not the same')
+            
+        if len(pax_hhi_comp[quarter]) != len(gdp_comp[quarter]):
             
             raise Exception('list lengths are not the same')
         
@@ -494,6 +537,13 @@ def compute(dummy_dict):
                 
                 pax_gdp_monop_no_missing[quarter].append(pax_hhi_monop[quarter][item])
                 gdp_monop_no_missing[quarter].append(gdp_monop[quarter][item])
+                
+        for item in range(len(pax_hhi_comp[quarter])):
+            
+            if gdp_comp[quarter][item] != 'NA':
+                
+                pax_gdp_comp_no_missing[quarter].append(pax_hhi_comp[quarter][item])
+                gdp_comp_no_missing[quarter].append(gdp_comp[quarter][item])
 
     print_options = {}
     print_options['title'] = 'pax weighted mean (mean) GDP per capita and biased std. dev.:'
@@ -503,6 +553,7 @@ def compute(dummy_dict):
     print_options['year_2013'] = (gdp_2013_no_missing, pax_gdp_2013_no_missing)
     print_options['quarterly'] = (True, [''], hhi.keys())
     print_options['monopoly'] = (gdp_monop_no_missing, pax_gdp_monop_no_missing)
+    print_options['competitive'] = (gdp_comp_no_missing, pax_gdp_comp_no_missing)
     
     print_output(**print_options)
 
@@ -514,6 +565,7 @@ def compute(dummy_dict):
     print_options['year_2013'] = (pax_hhi_2013, dict([(q, list(numpy.ones(len(pax_hhi_2013[q])))) for q in hhi.keys()]))
     print_options['quarterly'] = (True, [''], hhi.keys())
     print_options['monopoly'] = (pax_hhi_monop, dict([(q, list(numpy.ones(len(pax_hhi_monop[q])))) for q in hhi.keys()]))
+    print_options['competitive'] = (pax_hhi_comp, dict([(q, list(numpy.ones(len(pax_hhi_comp[q])))) for q in hhi.keys()]))
     
     print_output(**print_options)
     
@@ -525,20 +577,23 @@ def compute(dummy_dict):
     print_options['year_2013'] = (seats_2013, dict([(q, list(numpy.ones(len(seats_2013[q])))) for q in hhi.keys()]))
     print_options['quarterly'] = (True, [''], hhi.keys())
     print_options['monopoly'] = (seats_monop, dict([(q, list(numpy.ones(len(seats_monop[q])))) for q in hhi.keys()]))
+    print_options['competitive'] = (seats_comp, dict([(q, list(numpy.ones(len(seats_comp[q])))) for q in hhi.keys()]))
     
     print_output(**print_options)    
     
     return None
 
-def build(src_data, year, quarter, dummy_dict):
+def build(src_data, year, quarter, monopoly_dict, competitive_dict):
     
-    dummy_dict[str(year) + '_' + str(quarter)] = competitive_dummy.add_dummies(year, quarter)
+    monopoly_dict[str(year) + '_' + str(quarter)] = competitive_dummy.add_dummies(year, quarter)[0]
+    competitive_dict[str(year) + '_' + str(quarter)] = competitive_dummy.add_dummies(year, quarter)[1]
     
-    return dummy_dict
+    return monopoly_dict, competitive_dict
 
 def wrapper(test_run, test_periods, full_periods, security = None, security_max = None):
 
-    dummy_dict = {}
+    monopoly_dict = {}
+    competitive_dict = {}
 
     if test_run:
         
@@ -557,13 +612,13 @@ def wrapper(test_run, test_periods, full_periods, security = None, security_max 
             
             try:
                             
-                dummy_dict = build(src_data, year, quarter, dummy_dict)
+                monopoly_dict, competitive_dict = build(src_data, year, quarter, monopoly_dict, competitive_dict)
                 
             except IOError:
 
                 raise IOError('requested data unavailable: year ' + str(year) + ', quarter ' + str(quarter))
 
-    compute(dummy_dict)
+    compute(monopoly_dict, competitive_dict)
     
     return None
     
