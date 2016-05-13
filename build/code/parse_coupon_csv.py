@@ -2,7 +2,8 @@
 
 import time, os, zipfile, shutil
 
-import safe_cPickle, segment_timer
+import safe_cPickle
+import segment_timer
 import sort_coupon_csv_2011_on
 import coupon_descriptives
 
@@ -16,15 +17,15 @@ def parse_csv(src, security, security_max, year, quarter):
         'security_max must be a positive integer'
     
     print    
-    print '[source] ' + src
+    print '[source]\n\n\t' + src
     
     dst_folder = '..\\input\\Origin_and_Destination_Survey_DB1BCoupon_' + str(year) + '_' + str(quarter) + '_FOLDER.csv'
 
     t_unzip_csv_start = segment_timer.timer(True)
 
-    print 'unzipping folder to \\input'
+    print '\n' + 'unzipping folder to \\input\n'
     
-    print '[destination] ' + dst_folder
+    print '[destination]\n\n\t' + dst_folder
     
     zip = zipfile.ZipFile(src)
     zip.extractall(dst_folder)
@@ -40,8 +41,8 @@ def parse_csv(src, security, security_max, year, quarter):
 
     if 2011 <= year <= 2013:
                 
-        print '[sort csv for 2011Q1 to 2013Q4 inclusive]'
-        print 'copying .csv from \\input (folder) to \\temp'
+        print '\n' + '[sort csv for 2011Q1 to 2013Q4 inclusive]'
+        print '\n' + 'copying .csv from \\input (folder) to \\temp'
         
         shutil.move(src_csv, dst_csv_2011q1_to_2013q4_temp)
         
@@ -49,7 +50,7 @@ def parse_csv(src, security, security_max, year, quarter):
     
     else:
         
-        print 'copying .csv from \\temp (folder) to \\temp'
+        print '\n' + 'copying .csv from \\temp (folder) to \\temp'
         
         shutil.move(src_csv, dst_csv)
     
@@ -57,7 +58,7 @@ def parse_csv(src, security, security_max, year, quarter):
 
     shutil.rmtree(dst_folder)
     
-    print '[warning] .csv \\input datafile is large'
+    print '\n[warning]\n\n\t .csv \\input datafile is large\n'
     
     print 'opening .csv file for line count'
     
@@ -69,12 +70,12 @@ def parse_csv(src, security, security_max, year, quarter):
     
     if security:
         
-        print '[** running in reduced-lines mode **]'
+        print '\n[** running in reduced-lines mode **]'
         max_count = None
         
     else:
         
-        print 'counting number of lines in dataset'    
+        print '\n' + 'counting number of lines in dataset'    
         max_count = 0
     
         t_count_lines_start = segment_timer.timer(True)
@@ -84,13 +85,14 @@ def parse_csv(src, security, security_max, year, quarter):
     
         print '%0.3f seconds to count lines in file'%(segment_timer.timer(False, t_count_lines_start))
         print 'number of lines of data (including header):', max_count
-        print 'sleeping for 5 seconds'
+        
+        print '\n' + 'sleeping for 5 seconds'
         
         time.sleep(5)    
     
     data_reader.close()
     
-    print 're-open .csv file for parse'
+    print '\n' + 're-open .csv file for parse'
     
     t_reopen_csv_start = segment_timer.timer(True)
     
@@ -106,7 +108,7 @@ def parse_csv(src, security, security_max, year, quarter):
     
     large_carrier_condition = False    
      
-    print 'construct list of Coupon .csv variable names, in key_list'
+    print '\n' + 'construct list of Coupon .csv variable names, in key_list'
     
     t_parse_timer = segment_timer.timer(True)
     
@@ -126,7 +128,8 @@ def parse_csv(src, security, security_max, year, quarter):
     
     print 'list of variables in dataset (.csv column order):',\
           len(key_list),'variables'
-    print '[variables]',
+
+    print '\n[variables]\n\n\t',
     
     for variable_name in key_list:
         print variable_name,
@@ -135,9 +138,10 @@ def parse_csv(src, security, security_max, year, quarter):
         'OpCarrier', 'Passengers', 'TkCarrier', 'Distance', 'FareClass']
     
     print
-    print 'retaining following variables (list order):',\
+    print '\n' + 'retaining following variables (list order):',\
           len(retain_names_list), 'variables'
-    print '[variables]',
+          
+    print '\n' + '[variables]\n\n\t',
 
     for variable_name in retain_names_list:
         if variable_name in key_list:
@@ -158,14 +162,14 @@ def parse_csv(src, security, security_max, year, quarter):
     
     if large_carrier_condition:
         
-        print 'retaining following large carriers:'
+        print '\n' + 'retaining following large carriers:'
         for i in large_carriers_dict:
             print i+' : ',
         print
         
     else:
         
-        print 'retaining all carriers'
+        print '\n' + 'retaining all carriers\n'
     
     count = 1
     
@@ -306,20 +310,20 @@ def parse_csv(src, security, security_max, year, quarter):
         
                     break
                 
-#                retain itinerary if the following conditions are satisfied:
+#                retain itinerary if all of the following conditions are satisfied:
 #                1) exactly 2 trip breaks
 #                2) origin=destination (round-trip)
 #                3) maximum 2 coupons - Jan. 2014: change to 4 for hub flights
 #                4) constant OpCarrier
 #                5) constant FareClass
 #                6) constant Passengers
-#                7) constant TkCarrier, not necessarily same as OpCarrier
+#                7) constant TkCarrier, same as OpCarrier
 #                8) no 'E' in CouponType (no cabotage on itinerary)
 #                i.e. direct return flights only (directional)
 #                9) specify which carriers to keep
 #                10) legs in lower 48 states only
 #                11) restricted and unrestricted coach class tickets only
-#                12) only retain non-code shared flights
+#                12) only retain non-code-shared flights
         
 #                to do: need to check whether OpCarrier code (IATA?) is constant over time
 #                or if there is an alternative unique carrier code
@@ -385,8 +389,6 @@ def parse_csv(src, security, security_max, year, quarter):
                     
 #                    if itinerary_condition satisfied, retain all data for itinerary
 #                    otherwise, continue searching for a new itinerary in data_reader
-#                    also retain WN "first class" tickets
-#                    also retain any class from C, D, F, G, X, Y (business, first, coach)
                     
                     for name in retain_names_list:
                         
@@ -417,31 +419,31 @@ def parse_csv(src, security, security_max, year, quarter):
         if security and count >= security_max:
             break
 
-    print '%0.3f seconds to parse data'%(segment_timer.timer(False, t_parse_timer))
+    print '\n' + '%0.3f seconds to parse data'%(segment_timer.timer(False, t_parse_timer))
     
-    print 'number of retained itineraries:', len(data_itin_dict[data_itin_dict.keys()[0]])
+    print '\n' + 'number of retained itineraries:', len(data_itin_dict[data_itin_dict.keys()[0]])
     print 'number of lines read:', count
     
-    print 'illustrative itineraries:'
+    print '\n' + '[illustrative itineraries]\n\n\t',
     
     if len(data_itin_dict[data_itin_dict.keys()[0]]) >= 3:
         for itin_number in xrange(3):
             for variable in retain_names_list:
                 print variable, data_itin_dict[variable][itin_number],
-            print
+            print '\n\t',
         
     if not security:
         print 'total number of lines:', max_count
     
 #    safe_cPickle Python dictionary coupon_year_quarter
     
-    print 'save .bin to \\temp'
+    print '\n' + 'save .bin to \\temp'
     
 #    if large_carrier_condition == True, dst filename will not change    
     
     dst = '..\\temp\\' + 'coupon_' + str(year) + '_' + str(quarter) + '.bin'
 
-    print '[temp] ' + dst
+    print '\n[temp]\n\n\t' + dst
                             
     safe_cPickle.safe_cPickle_dump(dst, data_itin_dict)
     
@@ -452,7 +454,7 @@ def parse_csv(src, security, security_max, year, quarter):
         
     data_reader.close()
     
-    print 'deleting .csv file from \\temp'
+    print 'deleting .csv file from \\temp\n'
     
     os.remove(dst_csv)
     

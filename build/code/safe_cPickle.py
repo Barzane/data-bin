@@ -23,13 +23,14 @@ def safe_cPickle_dump(dst, object):
             file_.close()
             
             print '%0.3f seconds to cPickle file'%(segment_timer.timer(False, t_pickle_start))
+            print
             
         else:
             raise Exception('terminating')
         
     except IOError:
         
-        print '(safe_cPickle has not detected object "' + dst + '") Saving object.'
+        print '\n' + '(safe_cPickle has not detected object "' + dst + '") Saving object.'
         
         t_pickle_start = segment_timer.timer(True)
         
@@ -38,5 +39,6 @@ def safe_cPickle_dump(dst, object):
         file_.close()
         
         print '%0.3f seconds to cPickle file'%(segment_timer.timer(False, t_pickle_start))
+        print
         
     return None

@@ -16,7 +16,7 @@ import data_full_bin_descriptives
 def horizontal():
     
     print
-    print '-'*80
+    print '-'*90
     print
     
     return None
@@ -30,7 +30,7 @@ def manual_transfer_reminder():
     print '** T100 datafiles must be manually renamed after download from U.S. DOT **'
     print
     
-    raw_input('press a key to continue')
+#    raw_input('press a key to continue')
     
     return None
 
@@ -63,13 +63,12 @@ horizontal()
 
 parse_options = {}
 parse_options['test_run'] = True
-parse_options['security'] = True
+parse_options['security'] = False
 parse_options['security_max'] = 10000
 parse_options['test_periods'] = ([2010], [1])
 parse_options['full_periods'] = (xrange(1993, 2014, 1), xrange(1, 5))
 
-#print
-#print 'parse DB1B Coupon data from .zip to coupon_year_quarter.bin'
+#parse DB1B Coupon data from .zip to coupon_year_quarter.bin
 
 parse_coupon_csv.wrapper(**parse_options)
 
