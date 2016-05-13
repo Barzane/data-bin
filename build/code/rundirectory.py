@@ -13,22 +13,35 @@ import parse_gdp_by_msa
 import merge_bin
 import data_full_bin_descriptives
 
+def horizontal():
+    
+    print
+    print '-'*80
+    print
+    
+    return None
+
 def manual_transfer_reminder():
 
     print
     print 'manually transfer .zip datafiles to data\\DB1BXXXXXX before continuing'
-    print 'e.g. Origin_and_Destination_Survey_DB1BXXXXXXX_2010_1.zip'
+    print 'e.g., Origin_and_Destination_Survey_DB1BXXXXXXX_2010_1.zip'
     print
     print '** DISK SPACE REQUIREMENT: ~ 4 GB for 10 quarter parse (temp/ files) **'
     print '** T100 datafiles must be manually renamed after download from U.S. DOT **'
     print
     
     raw_input('press a key to continue')
+    print
     
     return None
 
 def clear_output_temp_input():
     
+    print
+    print 'clear contents of \output and \\temp and \input'
+    print
+
     for folder in ['..\\output\\*', '..\\temp\\*', '..\\input\\*']:
     
         folder_contents = glob.glob(folder)
@@ -38,16 +51,18 @@ def clear_output_temp_input():
             os.remove(filename)
     
     return None
-    
-#manual_transfer_reminder()
-#
-#print
-#print 'clear contents of \output and \\temp and \input'
-#    
-#clear_output_temp_input()
-#
-#print 'test_run = True parses Coupon or Ticket for one quarter only'
-#print 'security = True considers first (security_max) lines only'
+
+horizontal()
+   
+manual_transfer_reminder()
+horizontal()
+
+clear_output_temp_input()
+horizontal()
+
+print 'test_run = True parses Coupon or Ticket for one quarter only'
+print 'security = True considers first (security_max) lines only'
+sss
 
 parse_options = {}
 parse_options['test_run'] = False
