@@ -454,7 +454,7 @@ def parse_csv(src, security, security_max, year, quarter):
         
     data_reader.close()
     
-    print 'deleting .csv file from \\temp\n'
+    print '\n' + 'deleting .csv file from \\temp\n'
     
     os.remove(dst_csv)
     

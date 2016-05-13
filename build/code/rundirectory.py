@@ -65,7 +65,7 @@ parse_options = {}
 parse_options['test_run'] = True
 parse_options['security'] = False
 parse_options['security_max'] = 10000
-parse_options['test_periods'] = ([2010], [1])
+parse_options['test_periods'] = ([2013], [4])
 parse_options['full_periods'] = (xrange(1993, 2014, 1), xrange(1, 5))
 
 #parse DB1B Coupon data from .zip to coupon_year_quarter.bin
