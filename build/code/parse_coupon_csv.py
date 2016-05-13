@@ -8,6 +8,8 @@ import coupon_descriptives
 
 def parse_csv(src, security, security_max, year, quarter):
     
+    print 'parse DB1B Coupon data from .zip to coupon_year_quarter.bin'
+    
     assert isinstance(src, str), 'src must be a string'
     assert isinstance(security, bool), 'security must be a Boolean'
     assert ((security_max > 0) and isinstance(security_max, int)),\
