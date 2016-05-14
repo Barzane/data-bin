@@ -30,7 +30,7 @@ def manual_transfer_reminder():
     print '** T100 datafiles must be manually renamed after download from U.S. DOT **'
     print
     
-#    raw_input('press a key to continue')
+    raw_input('press a key to continue')
     
     return None
 
