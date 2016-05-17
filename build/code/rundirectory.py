@@ -93,22 +93,24 @@ parse_options['full_periods'] = (xrange(1993, 2014, 1), xrange(1, 5))
 #print 'parse T-100 .csv files to .bin, save to \\temp'
 #print '** note that raw T-100 .zip and .csv must be renamed as yyyy_*.* before use **'
 
+#horizontal()
+
+#parse_t100.wrapper(**parse_options)
+
+#print 'parse regional population (by MSA) data'
+
+#horizontal()
+
+#parse_population_by_msa.parse()
+
+#print 'parse airport coordinates'
+
 horizontal()
 
-parse_t100.wrapper(**parse_options)
+parse_airport_coordinates.parse()
 
 sss
 
-#print
-#print 'parse regional population (by MSA) data'
-#
-#parse_population_by_msa.parse()
-#
-#print
-#print 'parse airport coordinates'
-#
-#parse_airport_coordinates.parse()
-#
 #print
 #print 'parse regional GDP (by MSA) data'
 #

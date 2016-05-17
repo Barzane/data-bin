@@ -4,15 +4,17 @@ import cPickle, copy, shutil
 
 def parse():
     
+    print 'parse regional population (by MSA) data'
+    
     src = '..\\..\\data\\Population\\popDataFinal.txt'
     dst = '..\\input\\popDataFinal.txt'   
     dst_bin = '..\\temp\\population_by_msa_dict.bin'   
     
-    print 'copying population data from \\data\\Population to \\input'
+    print '\ncopying population data from \\data\\Population to \\input'
     
     shutil.copy(src, dst)
     
-    print 'opening ' + dst
+    print '\nopening ' + dst
 
     f = open(dst, 'r')
     
@@ -37,7 +39,7 @@ def parse():
     
     f.close()
     
-    print 'saving ' + dst_bin
+    print '\nsaving ' + dst_bin
     
     f = open(dst_bin, 'wb')
     cPickle.dump(msa_location, f)
