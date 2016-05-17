@@ -52,17 +52,16 @@ def parse(src, year):
     assert isinstance(year, int), 'year must be an integer'
 
     error_string = ''
-    
-    print    
-    print '[source] ' + src
+        
+    print '\n[source]\n\n\t' + src
     
     dst_folder = '..\\input\\' + str(year) + '_T100D_SEGMENT_ALL_CARRIER_FOLDER.csv'
 
     t_unzip_csv_start = segment_timer.timer(True)
 
-    print 'unzipping folder to \\input'
+    print '\nunzipping folder to \\input'
     
-    print '[destination] ' + dst_folder
+    print '\n[destination]\n\n\t' + dst_folder
     
     zip = zipfile.ZipFile(src)
     zip.extractall(dst_folder)
@@ -71,7 +70,7 @@ def parse(src, year):
     src_csv = dst_folder + '\\' + str(year) + '_T100D_SEGMENT_ALL_CARRIER.csv'    
     dst_csv = '..\\temp\\' + str(year) + '_T100D_SEGMENT_ALL_CARRIER.csv'
         
-    print 'copying .csv from \\input (folder) to \\temp'
+    print '\ncopying .csv from \\input (folder) to \\temp'
         
     shutil.move(src_csv, dst_csv)
     
@@ -79,9 +78,9 @@ def parse(src, year):
 
     shutil.rmtree(dst_folder)
     
-    print '[warning] .csv \\input datafile is large'
+    print '\n[warning]\n\n\t .csv \\input datafile is large'
 
-    print 'opening: ' + dst_csv
+    print '\nopening: ' + dst_csv
         
     f = open(dst_csv, 'r')
     
@@ -101,10 +100,10 @@ def parse(src, year):
         
     header_list = header_list[1:]
     
-    print 'List of variables in dataset (.csv column order):',\
+    print '\nList of variables in dataset (.csv column order):',\
         len(header_list), 'variables'
         
-    print
+    print '\n\t',
     
     for variable_name in header_list:
         print variable_name,
@@ -119,12 +118,11 @@ def parse(src, year):
     retain_list = ['DEPARTURES_PERFORMED', 'CARRIER_GROUP', 'PASSENGERS',\
                     'SEATS','AIRCRAFT_GROUP','AIRCRAFT_TYPE','AIRCRAFT_CONFIG',\
                     'AIR_TIME','RAMP_TO_RAMP']
-    
-    print
-    print 'Retaining following variables (list order):',\
+
+    print '\nRetaining following variables (list order):',\
         len(retain_name_list), 'variables' 
     
-    print
+    print '\n\t',
     
     for variable_name in retain_name_list:
         
@@ -141,8 +139,6 @@ def parse(src, year):
     
     data_itin_dict = dict([x, []] for x in retain_name_list)
     
-    print
-
     t_open_csv_start = segment_timer.timer(True)
 
     intermediate_dict={}
@@ -259,13 +255,13 @@ def parse(src, year):
         if data_dict[key]['DEPARTURES_PERFORMED'] != 0.0:
             
             data_dict[key]['MEAN_RAMP_TO_RAMP'] = data_dict[key]['RAMP_TO_RAMP'] / data_dict[key]['DEPARTURES_PERFORMED']
-                     
-    print count,'lines'
+    
+    print '\nnumber of lines', count
     print ('%0.3f seconds to parse data'%(segment_timer.timer(False, t_open_csv_start)))
 
     dst_temp = '..\\temp\\T100_merge_' + str(year) + '.bin'
 
-    print 'save file: ' + dst_temp
+    print '\nsave file: ' + dst_temp
     
     f = open (dst_temp, 'wb')
     cPickle.dump(data_dict, f)
