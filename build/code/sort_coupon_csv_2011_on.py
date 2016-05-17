@@ -9,7 +9,7 @@ def sort_coupon_csv(dst_csv_2011q1_to_2013q4_temp, dst_csv, year, quarter):
     data_reader = open(dst_csv_2011q1_to_2013q4_temp, 'r')
     
     print
-    print '[sorting file] ' + dst_csv_2011q1_to_2013q4_temp
+    print '[sorting file]\n\n\t' + dst_csv_2011q1_to_2013q4_temp
     
     t_start = segment_timer.timer(True)
     
@@ -68,7 +68,7 @@ def sort_coupon_csv(dst_csv_2011q1_to_2013q4_temp, dst_csv, year, quarter):
     
     key_list.sort()
     
-    print 'sorted keys'
+    print '\n' + 'sorted keys'
     print ('runtime : %0.3f seconds'%(segment_timer.timer(False, t_start)))
     
     t_start = segment_timer.timer(True)
@@ -92,12 +92,12 @@ def sort_coupon_csv(dst_csv_2011q1_to_2013q4_temp, dst_csv, year, quarter):
             
     key_list_.append(key_list[-1])
 
-    print 'removed duplicates :', count_duplicates
+    print '\n' + 'removed duplicates :', count_duplicates
     print ('runtime : %0.3f seconds'%(segment_timer.timer(False, t_start)))
     
     t_start = segment_timer.timer(True)
     
-    print '[saving sorted file] ' + dst_csv    
+    print '\n' + '[saving sorted file]\n\n\t' + dst_csv    
     
     f = open(dst_csv, 'w')
     
@@ -117,10 +117,10 @@ def sort_coupon_csv(dst_csv_2011q1_to_2013q4_temp, dst_csv, year, quarter):
     
     data_reader.close()
     
-    print 'end of sort'
+    print '\n' + 'end of sort'
     print ('runtime : %0.3f seconds'%(segment_timer.timer(False, t_start)))
 
-    print '[deleting unsorted .csv] ' + dst_csv_2011q1_to_2013q4_temp
+    print '\n' + '[deleting unsorted .csv]\n\n\t' + dst_csv_2011q1_to_2013q4_temp
     os.remove(dst_csv_2011q1_to_2013q4_temp)
     
     print
