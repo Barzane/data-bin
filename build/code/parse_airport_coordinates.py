@@ -7,11 +7,13 @@ import csv, cPickle, shutil
 
 def parse():
     
+    print 'parse airport coordinates'
+    
     src = '..\\..\\data\\Coordinates\\airport_locations.csv'
     dst = '..\\input\\airport_locations.csv'   
     dst_bin = '..\\temp\\airport_location_degrees.bin'   
     
-    print 'copying population data from \\data\\Coordinates to \\input'
+    print '\ncopying population data from \\data\\Coordinates to \\input'
     
     shutil.copy(src, dst)
     
@@ -20,7 +22,7 @@ def parse():
     
     airport_location_dict = {}
     
-    print 'parsing ' + dst
+    print '\nparsing ' + dst
     
     for row in reader:
         
@@ -31,12 +33,12 @@ def parse():
 
     f.close()
     
-    print 'saving ' + dst_bin
+    print '\nillustrative data: ', airport_location_dict['ORD']
+    
+    print '\nsaving ' + dst_bin
           
     f = open(dst_bin, 'wb')
     cPickle.dump(airport_location_dict, f)
     f.close()
-    
-#    print airport_location_dict['UTM']
     
     return None

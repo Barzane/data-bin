@@ -105,17 +105,18 @@ parse_options['full_periods'] = (xrange(1993, 2014, 1), xrange(1, 5))
 
 #print 'parse airport coordinates'
 
+#horizontal()
+#
+#parse_airport_coordinates.parse()
+
+#print 'parse regional GDP (by MSA) data'
+
 horizontal()
 
-parse_airport_coordinates.parse()
+parse_gdp_by_msa.parse()
 
 sss
 
-#print
-#print 'parse regional GDP (by MSA) data'
-#
-#parse_gdp_by_msa.parse()
-#
 #import build_dataset
 #import convert_bin_to_text
 #
