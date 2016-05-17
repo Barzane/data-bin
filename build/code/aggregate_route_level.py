@@ -183,8 +183,6 @@ def compress(src, yyyy, q):
         
         print key, '%0.1f percent not coach'%(100 * d_class_coach_only[key])
     
-    print
-    
     print '\ncompress dictionary, no error trap for Distance, TkCarrier, FareClass'
         
     t_start = segment_timer.timer(True)
