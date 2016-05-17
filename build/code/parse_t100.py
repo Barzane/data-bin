@@ -44,7 +44,10 @@ def add_to_b(next_line_list):
     return line_data
 
 def parse(src, year):
-   
+
+    print 'parse T-100 .csv files to .bin, save to \\temp'
+    print '** note that raw T-100 .zip and .csv must be renamed as yyyy_*.* before use **'
+
     assert isinstance(src, str), 'src must be a string'
     assert isinstance(year, int), 'year must be an integer'
 

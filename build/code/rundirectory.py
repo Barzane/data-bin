@@ -86,18 +86,19 @@ parse_options['full_periods'] = (xrange(1993, 2014, 1), xrange(1, 5))
 
 #print 'aggregate itinerary*.bin to route-level'
 
+#horizontal()
+
+#aggregate_route_level.wrapper(**parse_options)
+
+#print 'parse T-100 .csv files to .bin, save to \\temp'
+#print '** note that raw T-100 .zip and .csv must be renamed as yyyy_*.* before use **'
+
 horizontal()
 
-aggregate_route_level.wrapper(**parse_options)
+parse_t100.wrapper(**parse_options)
 
 sss
 
-#print
-#print 'parse T-100 .csv files to .bin, save to \\temp'
-#print '** note that raw T-100 .zip and .csv must be renamed as yyyy_*.* before use **'
-#
-#parse_t100.wrapper(**parse_options)
-#
 #print
 #print 'parse regional population (by MSA) data'
 #
