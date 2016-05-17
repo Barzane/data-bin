@@ -4,15 +4,17 @@ import cPickle, copy, shutil
 
 def parse():
     
+    print 'parse regional GDP (by MSA) data'
+    
     src = '..\\..\\data\\GDP\\gdpDataFinal.txt'
     dst = '..\\input\\gdpDataFinal.txt'   
     dst_bin = '..\\temp\\gdp_by_msa_dict.bin'   
     
-    print 'copying GDP data from \\data\\GDP to \\input'
+    print '\ncopying GDP data from \\data\\GDP to \\input'
     
     shutil.copy(src, dst)
     
-    print 'opening ' + dst
+    print '\nopening ' + dst
 
     f = open(dst, 'r')
     
@@ -37,7 +39,7 @@ def parse():
     
     f.close()
     
-    print 'saving ' + dst_bin
+    print '\nsaving ' + dst_bin
     
     f = open(dst_bin, 'wb')
     cPickle.dump(msa_location, f)
