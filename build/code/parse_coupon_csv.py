@@ -310,20 +310,16 @@ def parse_csv(src, security, security_max, year, quarter):
         
                     break
                 
-#                retain itinerary if all of the following conditions are satisfied:
-#                1) exactly 2 trip breaks
+#                retain itinerary if the following conditions are satisfied:
+#                1) 2 trip breaks
 #                2) origin=destination (round-trip)
-#                3) maximum 2 coupons - Jan. 2014: change to 4 for hub flights
+#                3) 2 coupons
 #                4) constant OpCarrier
 #                5) constant FareClass
 #                6) constant Passengers
 #                7) constant TkCarrier, same as OpCarrier
 #                8) no 'E' in CouponType (no cabotage on itinerary)
-#                i.e. direct return flights only (directional)
-#                9) specify which carriers to keep
-#                10) legs in lower 48 states only
-#                11) restricted and unrestricted coach class tickets only
-#                12) only retain non-code-shared flights
+#                9) legs in lower 48 states only
         
 #                to do: need to check whether OpCarrier code (IATA?) is constant over time
 #                or if there is an alternative unique carrier code
