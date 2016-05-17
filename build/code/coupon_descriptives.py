@@ -17,7 +17,6 @@ def compute(year, quarter):
         print
         print 'file not found', src
     
-    print
     print 'descriptives:'
     
     print '\t', src
