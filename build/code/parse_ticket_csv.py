@@ -5,6 +5,8 @@ import time, os, zipfile, shutil
 import safe_cPickle, segment_timer
 
 def parse_csv(src, security, security_max, year, quarter):    
+
+    print 'parse DB1B Ticket data from .zip to coupon_year_quarter.bin'
     
     assert isinstance(src, str), 'src must be a string'
     assert isinstance(security, bool), 'security must be a Boolean'
@@ -12,15 +14,15 @@ def parse_csv(src, security, security_max, year, quarter):
         'security_max must be a positive integer'
     
     print    
-    print '[source] ' + src
+    print '[source]\n\n\t' + src
     
     dst_folder = '..\\input\\Origin_and_Destination_Survey_DB1BTicket_' + str(year) + '_' + str(quarter) + '_FOLDER.csv'
 
     t_unzip_csv_start = segment_timer.timer(True)
 
-    print 'unzipping folder to \\input'
+    print '\n' + 'unzipping folder to \\input'
     
-    print '[destination] ' + dst_folder
+    print '\n[destination]\n\n\t' + dst_folder
     
     zip = zipfile.ZipFile(src)
     zip.extractall(dst_folder)
@@ -29,7 +31,7 @@ def parse_csv(src, security, security_max, year, quarter):
     src_csv = dst_folder + '\\Origin_and_Destination_Survey_DB1BTicket_' + str(year) + '_' + str(quarter) + '.csv'    
     dst_csv = '..\\temp\\Origin_and_Destination_Survey_DB1BTicket_' + str(year) + '_' + str(quarter) + '.csv'
         
-    print 'copying .csv from \\input (folder) to \\temp'
+    print '\n' + 'copying .csv from \\input (folder) to \\temp'
         
     shutil.move(src_csv, dst_csv)
     
@@ -37,9 +39,9 @@ def parse_csv(src, security, security_max, year, quarter):
 
     shutil.rmtree(dst_folder)    
     
-    print '[warning] .csv \\input datafile is large'
+    print '\n' + '[warning]\n\n\t .csv \\input datafile is large'
     
-    print 'opening .csv file for line count'
+    print '\n' + 'opening .csv file for line count'
     
     data_reader = open(dst_csv, 'r')    
     
@@ -49,12 +51,12 @@ def parse_csv(src, security, security_max, year, quarter):
     
     if security:
         
-        print '[** running in reduced-lines mode **]'
+        print '\n[** running in reduced-lines mode **]'
         max_count = None
         
     else:
         
-        print 'counting number of lines in dataset'    
+        print '\ncounting number of lines in dataset'    
         max_count = 0
     
         t_count_lines_start = segment_timer.timer(True)
@@ -63,14 +65,14 @@ def parse_csv(src, security, security_max, year, quarter):
             max_count += 1
     
         print '%0.3f seconds to count lines in file'%(segment_timer.timer(False, t_count_lines_start))
-        print 'number of lines of data (including header):', max_count
+        print '\nnumber of lines of data (including header):', max_count
         print 'sleeping for 5 seconds'
         
         time.sleep(5)    
     
     data_reader.close()
     
-    print 're-open .csv file for parse'
+    print '\nre-open .csv file for parse'
     
     t_reopen_csv_start = segment_timer.timer(True)
     
@@ -78,7 +80,7 @@ def parse_csv(src, security, security_max, year, quarter):
     
     print '%0.3f seconds to re-open file'%(segment_timer.timer(False, t_reopen_csv_start))
      
-    print 'construct list of Ticket .csv variable names, in key_list'
+    print '\nconstruct list of Ticket .csv variable names, in key_list'
     
     t_parse_timer = segment_timer.timer(True)
     
@@ -98,7 +100,7 @@ def parse_csv(src, security, security_max, year, quarter):
     
     print 'list of variables in dataset (.csv column order):',\
           len(key_list),'variables'
-    print '[variables]',
+    print '\n[variables]\n\n\t',
     
     for variable_name in key_list:
         print variable_name,
@@ -106,9 +108,9 @@ def parse_csv(src, security, security_max, year, quarter):
     retain_names_list = ['ItinID', 'ItinFare', 'DollarCred', 'BulkFare']
     
     print
-    print 'retaining following variables (list order):',\
+    print '\nretaining following variables (list order):',\
           len(retain_names_list), 'variables'
-    print '[variables]',
+    print '\n[variables]\n\n\t',
 
     for variable_name in retain_names_list:
         if variable_name in key_list:
@@ -127,7 +129,7 @@ def parse_csv(src, security, security_max, year, quarter):
     for variable_name in retain_names_list:
         data_itin_dict[variable_name] = []
     
-    print 'retaining all carriers'
+    print '\nretaining all carriers'
     
     count = 1
     
@@ -135,7 +137,7 @@ def parse_csv(src, security, security_max, year, quarter):
         
         t_intermediate_parse = segment_timer.timer(True)
         
-        print 'parsing data, percentage completed:'
+        print '\nparsing data, percentage completed:'
         
         top_count = max_count / 100
         print count / top_count
@@ -169,10 +171,10 @@ def parse_csv(src, security, security_max, year, quarter):
 
     print '%0.3f seconds to parse data'%(segment_timer.timer(False, t_parse_timer))
     
-    print 'number of retained itineraries:', len(data_itin_dict[data_itin_dict.keys()[0]])
+    print '\nnumber of retained itineraries:', len(data_itin_dict[data_itin_dict.keys()[0]])
     print 'number of lines read:', count
     
-    print 'illustrative itineraries:'
+    print '\nillustrative itineraries:\n'
     
     if len(data_itin_dict[data_itin_dict.keys()[0]]) >= 3:
         for itin_number in xrange(3):
@@ -181,7 +183,7 @@ def parse_csv(src, security, security_max, year, quarter):
             print
         
     if not security:
-        print 'total number of lines:', max_count
+        print '\ntotal number of lines:', max_count
     
 #    safe_cPickle Python dictionary ticket_year_quarter
     
@@ -189,7 +191,7 @@ def parse_csv(src, security, security_max, year, quarter):
         
     dst = '..\\temp\\' + 'ticket_' + str(year) + '_' + str(quarter) + '.bin'
 
-    print '[temp] ' + dst
+    print '\n[temp]\n\n\t' + dst
                             
     safe_cPickle.safe_cPickle_dump(dst, data_itin_dict)
     
@@ -200,7 +202,7 @@ def parse_csv(src, security, security_max, year, quarter):
     
     data_reader.close()
     
-    print 'deleting .csv file from \\temp'
+    print '\ndeleting .csv file from \\temp'
     
     os.remove(dst_csv)
     

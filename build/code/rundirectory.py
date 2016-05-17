@@ -48,18 +48,18 @@ def clear_output_temp_input():
     
     return None
 
-horizontal()
-   
-manual_transfer_reminder()
-horizontal()
-
-clear_output_temp_input()
-horizontal()
+#horizontal()
+#   
+#manual_transfer_reminder()
+#horizontal()
+#
+#clear_output_temp_input()
+#horizontal()
 
 print 'test_run = True parses Coupon or Ticket for one quarter only'
 print 'security = True considers first (security_max) lines only'
 
-horizontal()
+#horizontal()
 
 parse_options = {}
 parse_options['test_run'] = True
@@ -68,17 +68,18 @@ parse_options['security_max'] = 10000
 parse_options['test_periods'] = ([2013], [4])
 parse_options['full_periods'] = (xrange(1993, 2014, 1), xrange(1, 5))
 
-#parse DB1B Coupon data from .zip to coupon_year_quarter.bin
+#print 'parse DB1B Coupon data from .zip to coupon_year_quarter.bin'
 
-parse_coupon_csv.wrapper(**parse_options)
+#parse_coupon_csv.wrapper(**parse_options)
+
+#print 'parse DB1B Ticket data from .zip to coupon_year_quarter.bin'
+
+horizontal()
+
+parse_ticket_csv.wrapper(**parse_options)
 
 sss
 
-#print
-#print 'parse DB1B Ticket data from .zip to coupon_year_quarter.bin'
-#
-#parse_ticket_csv.wrapper(**parse_options)
-#
 #print
 #print 'merge Coupon and Ticket .bin files to Itinerary'
 #
