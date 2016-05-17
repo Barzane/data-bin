@@ -6,6 +6,8 @@ import segment_timer
 
 def compress(src, yyyy, q):
     
+    print 'aggregate itinerary*.bin to route-level'
+    
     t_start_total = segment_timer.timer(True)
     
     print
@@ -23,8 +25,8 @@ def compress(src, yyyy, q):
     
     route_level_dict = {}
     
-    print 'creating route-level dictionary'
-    print '- remove all tickets with (nominal) ItinFare < $20'
+    print '\ncreating route-level dictionary'
+    print '\n- remove all tickets with (nominal) ItinFare < $20'
     
     t_start = segment_timer.timer(True)
     
@@ -68,7 +70,7 @@ def compress(src, yyyy, q):
 
     print '%0.3f seconds '%(segment_timer.timer(False, t_start))
     
-    print '# route-carriers', len(route_level_dict.keys())
+    print '\n# route-carriers remaining', len(route_level_dict.keys())
     
     del itinerary
     
@@ -78,7 +80,7 @@ def compress(src, yyyy, q):
     
     route_level_dict_3 = {}
     
-    print '- remove all tickets with (nominal) ItinFare > 99th percentile of route-carrier-quarter fare distribution'
+    print '\n- remove all tickets with (nominal) ItinFare > 99th percentile of route-carrier-quarter fare distribution'
     
     t_start = segment_timer.timer(True)
             
@@ -110,11 +112,11 @@ def compress(src, yyyy, q):
     
     print '%0.3f seconds '%(segment_timer.timer(False, t_start))
     
-    print '# route-carriers', len(route_level_dict_3.keys())
+    print '\n# route-carriers remaining', len(route_level_dict_3.keys())
     
     route_level_dict_4 = {}
 
-    print '- remove all WN routes that involve DFW, from 1993Q1 to 1999Q4'
+    print '\n- remove all WN routes that involve DFW, from 1993Q1 to 1999Q4'
 
     t_start = segment_timer.timer(True)
     
@@ -147,8 +149,8 @@ def compress(src, yyyy, q):
 
     print '%0.3f seconds '%(segment_timer.timer(False, t_start))
     
-    print '# WN DFW routes removed:', count_wn_dfw_tickets
-    print '# route-carriers', len(route_level_dict_4.keys())
+    print '\n# WN DFW routes removed:', count_wn_dfw_tickets
+    print '\n# route-carriers remaining', len(route_level_dict_4.keys())
     
     d_class = {}
     
@@ -183,7 +185,7 @@ def compress(src, yyyy, q):
     
     print
     
-    print 'compress dictionary, no error trap for Distance, TkCarrier, FareClass'
+    print '\ncompress dictionary, no error trap for Distance, TkCarrier, FareClass'
         
     t_start = segment_timer.timer(True)
     
@@ -248,7 +250,7 @@ def compress(src, yyyy, q):
     
     route_level_dict_6 = {}
     
-    print '- remove all route-carriers with < 100 passengers in quarter'
+    print '\n- remove all route-carriers with < 100 passengers in quarter'
     
     t_start = segment_timer.timer(True)
     
@@ -264,11 +266,11 @@ def compress(src, yyyy, q):
     
     print '%0.3f seconds '%(segment_timer.timer(False, t_start))
     
-    print '# route-carriers', len(route_level_dict_6.keys())
+    print '\n# route-carriers remaining', len(route_level_dict_6.keys())
     
     dst_route_carrier = '..\\temp\\routecarrier_' + str(yyyy) + '_' + str(q) + '.bin'
     
-    print 'saving: ' + dst_route_carrier
+    print '\nsaving: ' + dst_route_carrier
     
     t_start = segment_timer.timer(True)
     
@@ -278,7 +280,7 @@ def compress(src, yyyy, q):
 
     print '%0.3f seconds '%(segment_timer.timer(False, t_start))
     
-    print 'total time:'
+    print '\ntotal time:'
     print '%0.3f seconds '%(segment_timer.timer(False, t_start_total))
 
     del route_level_dict_6
