@@ -74,17 +74,18 @@ parse_options['full_periods'] = (xrange(1993, 2014, 1), xrange(1, 5))
 
 #print 'parse DB1B Ticket data from .zip to coupon_year_quarter.bin'
 
+#horizontal()
+
+#parse_ticket_csv.wrapper(**parse_options)
+
+#print 'merge Coupon and Ticket .bin files to Itinerary'
+
 horizontal()
 
-parse_ticket_csv.wrapper(**parse_options)
+merge_coupon_ticket.wrapper(**parse_options)
 
 sss
 
-#print
-#print 'merge Coupon and Ticket .bin files to Itinerary'
-#
-#merge_coupon_ticket.wrapper(**parse_options)
-#
 #print
 #print 'aggregate itinerary*.bin to route-level'
 #

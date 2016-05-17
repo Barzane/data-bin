@@ -7,10 +7,12 @@ import cpi_parse
 
 def merge(src_coupon, src_ticket, yyyy, q):
     
+    print 'merge Coupon and Ticket .bin files to Itinerary'    
+    
     t_start_total = segment_timer.timer(True)
     
     print
-    print '[loading] ' + src_ticket
+    print '[loading]\n\n\t' + src_ticket
     
     t_start = segment_timer.timer(True)
     
@@ -20,7 +22,7 @@ def merge(src_coupon, src_ticket, yyyy, q):
     
     print '%0.3f seconds '%(segment_timer.timer(False, t_start))
     
-    print '[loading] ' + src_coupon
+    print '\n[loading]\n\n\t' + src_coupon
     
     t_start = segment_timer.timer(True)
     
@@ -30,7 +32,7 @@ def merge(src_coupon, src_ticket, yyyy, q):
     
     print '%0.3f seconds '%(segment_timer.timer(False, t_start))
       
-    print 'copying coupon dictionary'
+    print '\ncopying coupon dictionary'
     
     t_start = segment_timer.timer(True)
     
@@ -49,7 +51,7 @@ def merge(src_coupon, src_ticket, yyyy, q):
     dollar_cred_dict = {}
     bulk_fare_dict = {}
     
-    print 'building ticket, DollarCred and BulkFare dictionaries'
+    print '\nbuilding ticket, DollarCred and BulkFare dictionaries'
     
     t_start = segment_timer.timer(True)
     
@@ -66,11 +68,11 @@ def merge(src_coupon, src_ticket, yyyy, q):
     if len(ticket_dict) != ticket_length:
         raise Exception('duplicate key in ticketDict')
     
-    print 'parsing CPI data'
+    print '\nparsing CPI data'
 
     CPI2013Q4_dict = cpi_parse.parse()
     
-    print 'add ItinFare and ItinFareReal (2013Q4 prices) to output dictionary'
+    print '\nadd ItinFare and ItinFareReal (2013Q4 prices) to output dictionary'
     
     t_start = segment_timer.timer(True)
     
@@ -83,7 +85,7 @@ def merge(src_coupon, src_ticket, yyyy, q):
     
     print '%0.3f seconds '%(segment_timer.timer(False, t_start))
     
-    print 'remove itineraries with DollarCred = 0'
+    print '\nremove itineraries with DollarCred = 0'
 
     t_start = segment_timer.timer(True)
     
@@ -119,7 +121,7 @@ def merge(src_coupon, src_ticket, yyyy, q):
 
     coupon_length_ = len(output[output.keys()[0]])
     
-    print 'remove itineraries with BulkFare = 1'
+    print '\nremove itineraries with BulkFare = 1'
 
     t_start = segment_timer.timer(True)
     
@@ -177,7 +179,7 @@ def merge(src_coupon, src_ticket, yyyy, q):
 
     f = open(dst_itinerary, 'wb')
     
-    print 'save itinerary ' + dst_itinerary
+    print '\nsave itinerary ' + dst_itinerary
     
     t_start = segment_timer.timer(True)
     
@@ -189,7 +191,7 @@ def merge(src_coupon, src_ticket, yyyy, q):
     
     f.close()
     
-    print 'Total time: ' + ('%0.3f seconds '%(segment_timer.timer(False, t_start_total)))
+    print '\nTotal time: ' + ('%0.3f seconds '%(segment_timer.timer(False, t_start_total)))
     
     return None
 
