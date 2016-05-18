@@ -4,6 +4,8 @@ import cPickle, copy
 
 def convert(year, quarter):
     
+    print 'convert .bin to .txt'
+    
     src_data = '..\\output\\data_' + str(year) + '_' + str(quarter) + '.bin'
     
 #    data .bin loaded from \output, not moved to \temp first
@@ -65,6 +67,7 @@ def convert(year, quarter):
     output_string = output_string.rstrip()
 
     print 'saving', dst_txt
+    print
 
     f = open(dst_txt, 'w')
     f.write(output_string)

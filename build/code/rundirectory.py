@@ -124,13 +124,12 @@ horizontal()
 
 build_dataset.wrapper(**parse_options)
 
+#print 'convert .bin to .txt'
+
+convert_bin_to_text.wrapper(**parse_options)
+
 sss
 
-#print
-#print 'convert .bin to .txt'
-#
-#convert_bin_to_text.wrapper(**parse_options)
-#
 #print
 #print 'merge .bin files'
 #
