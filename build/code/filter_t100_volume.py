@@ -4,8 +4,7 @@ import copy
 
 def filter(data_hold, T100):
     
-    print
-    print 'remove DB1B route-carrier-quarters with low T-100 volume, or that are missing from T-100'
+    print '\nremove DB1B route-carrier-quarters with low T-100 volume, or that are missing from T-100'
 
     found_key_count = 0
     missing_key_count = 0

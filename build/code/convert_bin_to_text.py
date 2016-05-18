@@ -18,6 +18,7 @@ def convert(year, quarter):
     var_list = copy.deepcopy(data_hold[data_hold.keys()[0]].keys())
     
 #    http://stackoverflow.com/questions/16581695/python-how-to-sort-lists-alphabetically-with-respect-to-capitalized-letters
+
     var_list = sorted(var_list, key=lambda L: (L.lower(), L))
     
     data_dict = {}

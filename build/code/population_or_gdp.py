@@ -5,7 +5,7 @@
 #1a. MSA populations given by 1990, 2000, 2010 U.S. Census
 #    (linear interpolation / extrapolation)
 #1b. MSA GDPs given by 2009, 2010, 2011 (estd. 2012) U.S. BEA
-#    (missing data imputed: method to be reviewed)
+#    (missing data imputed: method to be reviewed --- constant growth rate)
 #2. Each MSA linked to coordinates of first-listed city/town
 #3. Each airport (IATA code) linked to coordinates
 #4. Given airport, search across all MSAs
@@ -148,6 +148,13 @@ def local_population(test_airport):
 
             for year in range(1990, 2014):
 
+                illustration_condition = (test_airport == 'MCO' and year == 2013)
+
+                if illustration_condition:
+                    
+                    print '\ntest airport:', test_airport
+                    print 'airport coords:', airport_coords
+
 #                initialize cumulative local population
                 
                 population_sum = 0
@@ -168,6 +175,12 @@ def local_population(test_airport):
 #                    if MSA and airport are local, add population
                     
                     if distance <= radius:
+                        
+                        if illustration_condition:
+                            
+                            print '\n\tlocal MSA coords:', msa_coords
+                            print '\tlocal MSA population, year 2013:', population_by_msa_dict[msa_coords][year]
+                            print '\tdistance:', distance
                         
                         population_sum += population_by_msa_dict[msa_coords][year]
     

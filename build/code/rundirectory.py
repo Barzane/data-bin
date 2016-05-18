@@ -111,20 +111,21 @@ parse_options['full_periods'] = (xrange(1993, 2014, 1), xrange(1, 5))
 
 #print 'parse regional GDP (by MSA) data'
 
+#horizontal()
+#
+#parse_gdp_by_msa.parse()
+
+import build_dataset
+import convert_bin_to_text
+
+#print 'filter + add variables to data dictionary'
+
 horizontal()
 
-parse_gdp_by_msa.parse()
+build_dataset.wrapper(**parse_options)
 
 sss
 
-#import build_dataset
-#import convert_bin_to_text
-#
-#print
-#print 'filter + add variables to data dictionary'
-#
-#build_dataset.wrapper(**parse_options)
-#
 #print
 #print 'convert .bin to .txt'
 #
