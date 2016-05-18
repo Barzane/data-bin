@@ -53,13 +53,13 @@ def build(year, quarter, t_count):
     data_hold = add_percentiles.add(data_hold, route_carrier, [25, 75, 50, 10, 90])
     data_hold = add_passengers.add(data_hold, route_carrier)
     data_hold = add_t100.add(data_hold, T100)    
-    data_hold = add_population.add(data_hold)
+    data_hold = add_population.add(data_hold)    
+    data_hold = add_herfindahl.add(data_hold)
+    data_hold = add_route_market_share.add(data_hold)    
+    data_hold = add_temperature.add(data_hold)
     
     sss
     
-    data_hold = add_herfindahl.add(data_hold)
-    data_hold = add_route_market_share.add(data_hold)
-    data_hold = add_temperature.add(data_hold)
     data_hold = add_airport_market_share.add(data_hold)    
     data_hold = add_gdp.add(data_hold, CPI2013Q4Dict)
     data_hold = add_southwest_indicator.add(data_hold)
