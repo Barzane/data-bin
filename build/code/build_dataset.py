@@ -57,14 +57,14 @@ def build(year, quarter, t_count):
     data_hold = add_herfindahl.add(data_hold)
     data_hold = add_route_market_share.add(data_hold)    
     data_hold = add_temperature.add(data_hold)
-    
-    sss
-    
     data_hold = add_airport_market_share.add(data_hold)    
     data_hold = add_gdp.add(data_hold, CPI2013Q4Dict)
     data_hold = add_southwest_indicator.add(data_hold)
     data_hold = add_airport_coords.add(data_hold)
     data_hold = add_large_airport.add(data_hold)
+    
+    sss
+    
     data_hold = add_time.add(data_hold, t_count)
     
     return data_hold

@@ -45,6 +45,17 @@ def add(data_hold):
         
         large_airport_list.append(i[1])            
     
+    print '\nlarge airports:\n\n\t',
+    
+    tick = 1
+    
+    for airport in large_airport_list:
+        
+        print airport + ' (' + str(tick) + ')',
+        tick += 1
+        
+    print
+    
     for key in data_hold:
         
         list_v = key.split('_')
