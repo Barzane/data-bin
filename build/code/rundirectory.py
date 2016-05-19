@@ -56,8 +56,6 @@ horizontal()
 clear_output_temp_input()
 horizontal()
 
-sss
-
 #print 'test_run = True parses Coupon or Ticket for one quarter only'
 #print 'security = True considers first (security_max) lines only'
 
