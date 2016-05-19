@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import os, glob, shutil
+import os, glob, shutil, sys
 
 import parse_coupon_csv
 import parse_ticket_csv
@@ -12,7 +12,7 @@ import parse_airport_coordinates
 import parse_gdp_by_msa
 import merge_bin
 import data_full_bin_descriptives
-
+                    
 def horizontal():
     
     print
@@ -48,18 +48,18 @@ def clear_output_temp_input():
     
     return None
 
-#horizontal()
-#   
-#manual_transfer_reminder()
-#horizontal()
-#
-#clear_output_temp_input()
-#horizontal()
+horizontal()
+   
+manual_transfer_reminder()
+horizontal()
+    
+clear_output_temp_input()
+horizontal()
+
+sss
 
 #print 'test_run = True parses Coupon or Ticket for one quarter only'
 #print 'security = True considers first (security_max) lines only'
-
-#horizontal()
 
 parse_options = {}
 parse_options['test_run'] = True
@@ -70,50 +70,50 @@ parse_options['full_periods'] = (xrange(1993, 2014, 1), xrange(1, 5))
 
 #print 'parse DB1B Coupon data from .zip to coupon_year_quarter.bin'
 
-#parse_coupon_csv.wrapper(**parse_options)
+parse_coupon_csv.wrapper(**parse_options)
 
 #print 'parse DB1B Ticket data from .zip to coupon_year_quarter.bin'
 
-#horizontal()
+horizontal()
 
-#parse_ticket_csv.wrapper(**parse_options)
+parse_ticket_csv.wrapper(**parse_options)
 
 #print 'merge Coupon and Ticket .bin files to Itinerary'
 
-#horizontal()
+horizontal()
 
-#merge_coupon_ticket.wrapper(**parse_options)
+merge_coupon_ticket.wrapper(**parse_options)
 
 #print 'aggregate itinerary*.bin to route-level'
 
-#horizontal()
+horizontal()
 
-#aggregate_route_level.wrapper(**parse_options)
+aggregate_route_level.wrapper(**parse_options)
 
 #print 'parse T-100 .csv files to .bin, save to \\temp'
 #print '** note that raw T-100 .zip and .csv must be renamed as yyyy_*.* before use **'
 
-#horizontal()
+horizontal()
 
-#parse_t100.wrapper(**parse_options)
+parse_t100.wrapper(**parse_options)
 
 #print 'parse regional population (by MSA) data'
 
-#horizontal()
+horizontal()
 
-#parse_population_by_msa.parse()
+parse_population_by_msa.parse()
 
 #print 'parse airport coordinates'
 
-#horizontal()
-#
-#parse_airport_coordinates.parse()
+horizontal()
+
+parse_airport_coordinates.parse()
 
 #print 'parse regional GDP (by MSA) data'
 
-#horizontal()
-#
-#parse_gdp_by_msa.parse()
+horizontal()
+
+parse_gdp_by_msa.parse()
 
 import build_dataset
 import convert_bin_to_text
