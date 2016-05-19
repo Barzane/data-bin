@@ -2,12 +2,13 @@
 
 import cPickle, numpy, copy, operator
 
-def add_dummies(year, quarter):
+def add_dummies(year, quarter, print_descriptives=False):
 
     src = '..\\output\\data_' + str(year) + '_' + str(quarter) + '.bin'
 
-    print
-    print 'loading', src
+    if print_descriptives:
+        
+        print '\nloading', src
         
     f = open(src, 'rb')
     data = cPickle.load(f)
@@ -107,12 +108,14 @@ def add_dummies(year, quarter):
     nb_duopoly_routes = duopoly_route.values().count(1.0)
     nb_competitive_routes = competitive_route.values().count(1.0)
     
-    print
-    print 'year', year, 'quarter', quarter
-    print
-    print '\t' + 'number of routes', nb_routes
-    print '\t' + 'number of monopoly routes', nb_monopoly_routes, str(100*float(nb_monopoly_routes)/nb_routes)+'%'
-    print '\t' + 'number of duopoly routes', nb_duopoly_routes, str(100*float(nb_duopoly_routes)/nb_routes)+'%'
-    print '\t' + 'number of competitive routes', nb_competitive_routes, str(100*float(nb_competitive_routes)/nb_routes)+'%'
-    
+    if print_descriptives:
+        
+        print
+        print 'year', year, 'quarter', quarter
+        print
+        print '\t' + 'number of routes', nb_routes
+        print '\t' + 'number of monopoly routes', nb_monopoly_routes, str(100*float(nb_monopoly_routes)/nb_routes)+'%'
+        print '\t' + 'number of duopoly routes', nb_duopoly_routes, str(100*float(nb_duopoly_routes)/nb_routes)+'%'
+        print '\t' + 'number of competitive routes', nb_competitive_routes, str(100*float(nb_competitive_routes)/nb_routes)+'%'
+        
     return monopoly_route, competitive_route

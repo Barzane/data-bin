@@ -3,9 +3,10 @@
 import cPickle
 
 def merge(src_data, yyyy, q, full_data):
-        
-    print
-    print '[loading]', src_data
+    
+    print 'merge .bin files'
+    
+    print '\n[loading]', src_data
         
     f = open(src_data, 'r')
     data = cPickle.load(f)

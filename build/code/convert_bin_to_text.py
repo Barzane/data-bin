@@ -66,8 +66,7 @@ def convert(year, quarter):
         
     output_string = output_string.rstrip()
 
-    print 'saving', dst_txt
-    print
+    print '\nsaving', dst_txt
 
     f = open(dst_txt, 'w')
     f.write(output_string)

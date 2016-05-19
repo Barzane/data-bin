@@ -13,7 +13,7 @@ def weighted_avg_and_std(values, weights):
     
     return (average, math.sqrt(variance))
         
-def compute(monopoly_dict, competitive_dict):
+def compute(monopoly_dict, competitive_dict, test_run):
 
     src = '..\\output\\data_full.bin'
     
@@ -353,7 +353,7 @@ def compute(monopoly_dict, competitive_dict):
 #    print
 #    print airport_list
     
-    def print_output(title, full_sample, legacy, year_1999, year_2013, quarterly, monopoly, competitive):
+    def print_output(title, full_sample, legacy, year_1999, year_2013, quarterly, monopoly, competitive, test_run):
         
         if quarterly[0]:
             
@@ -376,13 +376,15 @@ def compute(monopoly_dict, competitive_dict):
         for quarter in loop:
             
             print '\t' + str(quarter), weighted_avg_and_std(legacy[0][quarter], legacy[1][quarter])
-            
-        print
-        print '[1999] ' + title
         
-        for quarter in loop:
+        if not test_run:
             
-            print '\t' + str(quarter), weighted_avg_and_std(year_1999[0][quarter], year_1999[1][quarter])
+            print
+            print '[1999] ' + title
+            
+            for quarter in loop:
+                
+                print '\t' + str(quarter), weighted_avg_and_std(year_1999[0][quarter], year_1999[1][quarter])
             
         print
         print '[2013] ' + title
@@ -412,11 +414,12 @@ def compute(monopoly_dict, competitive_dict):
     print_options['title'] = 'pax weighted mean distance (miles) and biased std. dev.:'
     print_options['full_sample'] = ({'': distance_list}, {'': pax_list})
     print_options['legacy'] = ({'': distance_list_legacy}, {'': pax_list_legacy})
-    print_options['year_1999'] = ({'': distance_list_1999}, {'': pax_list_1999})
+    print_options['year_1999'] = ({'': distance_list_1999}, {'': pax_list_1999})  
     print_options['year_2013'] = ({'': distance_list_2013}, {'': pax_list_2013})
     print_options['quarterly'] = (False, [''], hhi.keys())
     print_options['monopoly'] = ({'': distance_list_monop}, {'': pax_list_monop})
     print_options['competitive'] = ({'': distance_list_comp}, {'': pax_list_comp})
+    print_options['test_run'] = test_run
     
     print_output(**print_options)
     
@@ -424,11 +427,12 @@ def compute(monopoly_dict, competitive_dict):
     print_options['title'] = 'pax weighted mean HHI and biased std. dev.:'
     print_options['full_sample'] = (hhi, pax_hhi)
     print_options['legacy'] = (hhi_legacy, pax_hhi_legacy)
-    print_options['year_1999'] = (hhi_1999, pax_hhi_1999)
+    print_options['year_1999'] = (hhi_1999, pax_hhi_1999)       
     print_options['year_2013'] = (hhi_2013, pax_hhi_2013)
     print_options['quarterly'] = (True, [''], hhi.keys())
     print_options['monopoly'] = (hhi_monop, pax_hhi_monop)
     print_options['competitive'] = (hhi_comp, pax_hhi_comp)
+    print_options['test_run'] = test_run
     
     print_output(**print_options)
     
@@ -436,11 +440,12 @@ def compute(monopoly_dict, competitive_dict):
     print_options['title'] = 'pax weighted mean abs. temp. diff. and biased std. dev.:'
     print_options['full_sample'] = (temp, pax_hhi)
     print_options['legacy'] = (temp_legacy, pax_hhi_legacy)
-    print_options['year_1999'] = (temp_1999, pax_hhi_1999)
+    print_options['year_1999'] = (temp_1999, pax_hhi_1999)    
     print_options['year_2013'] = (temp_2013, pax_hhi_2013)
     print_options['quarterly'] = (True, [''], hhi.keys())
     print_options['monopoly'] = (temp_monop, pax_hhi_monop)
     print_options['competitive'] = (temp_comp, pax_hhi_comp)
+    print_options['test_run'] = test_run
     
     print_output(**print_options)
 
@@ -554,6 +559,7 @@ def compute(monopoly_dict, competitive_dict):
     print_options['quarterly'] = (True, [''], hhi.keys())
     print_options['monopoly'] = (gdp_monop_no_missing, pax_gdp_monop_no_missing)
     print_options['competitive'] = (gdp_comp_no_missing, pax_gdp_comp_no_missing)
+    print_options['test_run'] = test_run
     
     print_output(**print_options)
 
@@ -566,6 +572,7 @@ def compute(monopoly_dict, competitive_dict):
     print_options['quarterly'] = (True, [''], hhi.keys())
     print_options['monopoly'] = (pax_hhi_monop, dict([(q, list(numpy.ones(len(pax_hhi_monop[q])))) for q in hhi.keys()]))
     print_options['competitive'] = (pax_hhi_comp, dict([(q, list(numpy.ones(len(pax_hhi_comp[q])))) for q in hhi.keys()]))
+    print_options['test_run'] = test_run
     
     print_output(**print_options)
     
@@ -578,19 +585,22 @@ def compute(monopoly_dict, competitive_dict):
     print_options['quarterly'] = (True, [''], hhi.keys())
     print_options['monopoly'] = (seats_monop, dict([(q, list(numpy.ones(len(seats_monop[q])))) for q in hhi.keys()]))
     print_options['competitive'] = (seats_comp, dict([(q, list(numpy.ones(len(seats_comp[q])))) for q in hhi.keys()]))
+    print_options['test_run'] = test_run
     
     print_output(**print_options)    
     
     return None
 
-def build(src_data, year, quarter, monopoly_dict, competitive_dict):
+def build(src_data, year, quarter, monopoly_dict, competitive_dict, test_run):
     
-    monopoly_dict[str(year) + '_' + str(quarter)] = competitive_dummy.add_dummies(year, quarter)[0]
+    monopoly_dict[str(year) + '_' + str(quarter)] = competitive_dummy.add_dummies(year, quarter, print_descriptives=True)[0]
     competitive_dict[str(year) + '_' + str(quarter)] = competitive_dummy.add_dummies(year, quarter)[1]
     
     return monopoly_dict, competitive_dict
 
 def wrapper(test_run, test_periods, full_periods, security = None, security_max = None):
+
+    print 'results for text and table of summary statistics'
 
     monopoly_dict = {}
     competitive_dict = {}
@@ -612,13 +622,13 @@ def wrapper(test_run, test_periods, full_periods, security = None, security_max 
             
             try:
                             
-                monopoly_dict, competitive_dict = build(src_data, year, quarter, monopoly_dict, competitive_dict)
+                monopoly_dict, competitive_dict = build(src_data, year, quarter, monopoly_dict, competitive_dict, test_run)
                 
             except IOError:
 
                 raise IOError('requested data unavailable: year ' + str(year) + ', quarter ' + str(quarter))
 
-    compute(monopoly_dict, competitive_dict)
+    compute(monopoly_dict, competitive_dict, test_run)
     
     return None
     

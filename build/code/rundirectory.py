@@ -128,15 +128,15 @@ build_dataset.wrapper(**parse_options)
 
 convert_bin_to_text.wrapper(**parse_options)
 
-sss
-
-#print
 #print 'merge .bin files'
-#
-#merge_bin.wrapper(**parse_options)
 
-print
-print 'results for text and table of summary statistics'
+horizontal()
+
+merge_bin.wrapper(**parse_options)
+
+#print 'results for text and table of summary statistics'
+
+horizontal()
 
 data_full_bin_descriptives.wrapper(**parse_options)
 
