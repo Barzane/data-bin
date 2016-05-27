@@ -193,6 +193,12 @@ def merge(src_coupon, src_ticket, yyyy, q):
     
     print '\nTotal time: ' + ('%0.3f seconds '%(segment_timer.timer(False, t_start_total)))
     
+    del ticket_dict
+    del dollar_cred_dict
+    del bulk_fare_dict
+    del fare_nominal
+    del fare_real    
+    
     return None
 
 def wrapper(test_run, test_periods, full_periods, security = None, security_max = None):
